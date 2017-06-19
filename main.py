@@ -67,9 +67,9 @@ while True:
 
     #dibujar los estados en las pantalla
     cv2.putText(frame, "estado del sensor: {}".format(text), (10,20),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255) 2)
+        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255) 2)
     cv2.putText(frame, datetime.datetime.now().strftime("%A %d %B %Y %I:%M:%S%P"),
-                (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
+        (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
 
     #mostrar la imagen y grabarla con orden de tecla
 
