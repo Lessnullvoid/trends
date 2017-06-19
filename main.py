@@ -56,7 +56,7 @@ while True:
 
     #loop en lo contours
     for c in cnts:
-        #si es muy pequeño
+        #si es muy pequeno
         if cv2.contourArea(c) < args['main_area']:
             continue
 
