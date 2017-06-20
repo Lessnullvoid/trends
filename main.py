@@ -6,12 +6,14 @@
 import argparse
 import datetime
 import imutils
-import time, math
-import cv2, OSC
+import time
+import math
+import cv2
+import OSC
 import numpy
 
 
-## osc init
+# osc init
 send_addr = "192.168.0.10", 8338
 cOsc = OSC.OSCClient()
 cOsc.connect(send_addr)
@@ -40,6 +42,7 @@ while True:
 	# text
 	(grabbed, frame) = camera.read()
 	text = "OFF"
+
 
 	# if the frame could not be grabbed, then we have reached the end
 	# of the video
@@ -79,19 +82,11 @@ while True:
 		cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 1)
 		text = "ON"
 
-        #send osc message to start_sample
+        # send osc message to start_sample
         msg = OSC.OSCMessage()
         msg.setAddress("/1")
         msg.append(1)
         cOsc.send(msg)
-
-        #send osc message to stop_sample
-        msg = OSC.OSCMessage()
-        msg.setAddress("/1")
-        msg.append(0)
-        cOsc.send(msg)
-
-
 
 
 	# draw the text and timestamp on the frame
