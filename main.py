@@ -1,13 +1,20 @@
 # USAGE
-# python motion_detector.py
-# python motion_detector.py --video videos/example_01.mp4
+# python main.py (lectura de camara)
+# python main.py --video videos/example_01.mp4
 
 # import the necessary packages
 import argparse
 import datetime
 import imutils
-import time
-import cv2
+import time, math
+import cv2, OSC
+import numpy
+
+
+## osc init
+send_addr = "192.168.0.10", 8338
+cOsc = OSC.OSCClient()
+cOsc.connect(send_addr)
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -32,7 +39,7 @@ while True:
 	# grab the current frame and initialize the occupied/unoccupied
 	# text
 	(grabbed, frame) = camera.read()
-	text = "Unoccupied"
+	text = "OFF"
 
 	# if the frame could not be grabbed, then we have reached the end
 	# of the video
@@ -69,14 +76,29 @@ while True:
 		# compute the bounding box for the contour, draw it on the frame,
 		# and update the text
 		(x, y, w, h) = cv2.boundingRect(c)
-		cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-		text = "Occupied"
+		cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 1)
+		text = "ON"
+
+        #send osc message to start_sample
+        msg = OSC.OSCMessage()
+        msg.setAddress("/1")
+        msg.append(1)
+        cOsc.send(msg)
+
+        #send osc message to stop_sample
+        msg = OSC.OSCMessage()
+        msg.setAddress("/1")
+        msg.append(0)
+        cOsc.send(msg)
+
+
+
 
 	# draw the text and timestamp on the frame
-	cv2.putText(frame, "Room Status: {}".format(text), (10, 20),
-		cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+	cv2.putText(frame, "Estado del sensor: {}".format(text), (10, 20),
+		cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
 	cv2.putText(frame, datetime.datetime.now().strftime("%A %d %B %Y %I:%M:%S%p"),
-		(10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
+		(10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 255, 255), 1)
 
 	# show the frame and record if the user presses a key
 	cv2.imshow("Security Feed", frame)
