@@ -11,10 +11,21 @@ import math
 import cv2
 import OSC
 import numpy
+from pytrends.request import TrendReq
+
+# enter your own credentials
+google_username = "microhom@gmail.com"
+google_password = "xxx"
+path = ""
+
+#Login to google
+pytrend = TrendReq(google_username, google_password, custom_useragent="RenzoTrend Script")
+#capture API tokens
+pytrend.build_payload(kw_list=['temblor', 'heartquake', 'terremoto'])
 
 
 # osc init
-send_addr = "192.168.0.10", 8338
+send_addr = "192.168.0.20", 57120
 cOsc = OSC.OSCClient()
 cOsc.connect(send_addr)
 
@@ -88,6 +99,12 @@ while True:
         msg.append(1)
         cOsc.send(msg)
 
+        time.sleep(5)
+
+        msg = OSC.OSCMessage()
+        msg.setAddress("/1")
+        msg.append(0)
+        cOsc.send(msg)
 
 	# draw the text and timestamp on the frame
 	cv2.putText(frame, "Estado del sensor: {}".format(text), (10, 20),
@@ -97,8 +114,8 @@ while True:
 
 	# show the frame and record if the user presses a key
 	cv2.imshow("Security Feed", frame)
-	cv2.imshow("Thresh", thresh)
-	cv2.imshow("Frame Delta", frameDelta)
+	#cv2.imshow("Thresh", thresh)
+	#cv2.imshow("Frame Delta", frameDelta)
 	key = cv2.waitKey(1) & 0xFF
 
 	# if the `q` key is pressed, break from the lop
