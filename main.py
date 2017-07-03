@@ -1,6 +1,5 @@
 # USAGE
 # python main.py (lectura de camara)
-# python main.py --video videos/example_01.mp4
 
 # import the necessary packages
 import argparse
@@ -16,8 +15,8 @@ from pytrends.request import TrendReq
 
 
 # enter your own credentials
-google_username = "xxx"
-google_password = "xxx"
+google_username = "microhom@gmail.com"
+google_password = "H0mh0mh0m2016!"
 path = ""
 
 #Login to google
@@ -28,7 +27,7 @@ pytrend = TrendReq(google_username,
 pytrend.build_payload(kw_list=['temblor', 'heartquake', 'terremoto'])
 
 # osc init
-send_addr = "192.168.0.20", 57120
+send_addr = "192.168.1.37", 57120
 cOsc = OSC.OSCClient()
 cOsc.connect(send_addr)
 
@@ -113,10 +112,15 @@ while True:
 		cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 1)
 		text = "ON"
         # send osc message to start_sample
+        if OSCMessage == "ON"
         msg = OSC.OSCMessage()
         msg.setAddress("/1")
         msg.append(1)
         cOsc.send(msg)
+
+        msg = OSC.OSCMessage()
+        msg.setAddress("/1")
+        msg.append(0)
 
 
 	# draw the text and timestamp on the frame
@@ -126,7 +130,7 @@ while True:
 		(10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 255, 255), 1)
 
 	# show the frame and record if the user presses a key
-	cv2.imshow("Security Feed", frame)
+	cv2.imshow("Sensor Feed", frame)
 	#cv2.imshow("Thresh", thresh)
 	#cv2.imshow("Frame Delta", frameDelta)
 	key = cv2.waitKey(1) & 0xFF
