@@ -82,8 +82,8 @@ if __name__ == "__main__":
 	print "[t]: OSC : ok"
 
 	# trends
-	google_username = "microhom@gmail.com"
-	google_password = "H0mh0mh0m2016!"
+	google_username = "xx@gmail.com"
+	google_password = "xxx"
 	path = ""
 	kw_list=['temblor', 'terremoto', 'earthquake']
 	pytrend = TrendReq(google_username, google_password, custom_useragent="RenzoTrend Script")
@@ -123,7 +123,7 @@ if __name__ == "__main__":
 	pygame.mixer.pre_init(44100, -16, 2, 2048)
 	pygame.init()
 	clock = pygame.time.Clock()
-	screen = pygame.display.set_mode((1000,1000))
+	screen = pygame.display.setl_mode((1000,1000))
 	pygame.display.set_caption('[trends]: display')
 	pygame.mouse.set_visible(0)
 
