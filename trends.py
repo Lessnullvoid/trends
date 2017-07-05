@@ -6,6 +6,20 @@ trendyWindows
 . divide el campo visual en 9 ventanas
 . vigila la presencia de contours en cada una de ellas
 . cuando encuentra algo en una celda despliega trendyinfo
+
+funcionamiento:
+ssh pi@trends[n].local
+
+
+Editar la red wifi:
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+
+reinicias:
+sudo reboot -h now
+
+apagar rapsberry
+sudo shutdown -h now
+
 """
 
 # packages
@@ -21,11 +35,17 @@ import sys
 import time
 from random import randint
 
+#delay de 5 segundos al inicio
+#active color and images
+
+
+
 # fnc
 def get_cell_num(x, y):
 	mon_w = 320
 	mon_h = 240
 	if x < mon_w/3:	cx = 0
+
 	elif x > 2*mon_w/3: cx = 2
 	else: cx = 1
 	if y < mon_h/3: cy = 0
@@ -117,6 +137,8 @@ if __name__ == "__main__":
 	ren = font.render(text, 1, c_w)
 	screen.blit(ren, (disp_w/2 - size[0]/2, disp_h/2 - size[1]/2))
 	pygame.display.update()
+	pygame.display.colorGroup()
+
 	print "[t]: display : 0FF"
 
 	# get sounds
@@ -174,6 +196,8 @@ if __name__ == "__main__":
 			cx = int(M['m10']/M['m00'])
 			cy = int(M['m01']/M['m00'])
 			area = cv2.contourArea(cnt)
+			#window colorGroup(main)
+
 
 			# index cells
 			index = get_cell_num(cx, cy)
