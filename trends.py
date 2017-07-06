@@ -6,25 +6,11 @@ trendyWindows
 . divide el campo visual en 9 ventanas
 . vigila la presencia de contours en cada una de ellas
 . cuando encuentra algo en una celda despliega trendyinfo
-
-funcionamiento:
-ssh pi@trends[n].local
-
-
-Editar la red wifi:
-sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
-
-reinicias:
-sudo reboot -h now
-
-apagar rapsberry
-sudo shutdown -h now
-
 """
 
 # packages
 from pytrends.request import TrendReq
-#import OSC
+import OSC
 import pygame
 from pygame.locals import *
 import argparse
@@ -34,18 +20,14 @@ import numpy as np
 import sys
 import time
 from random import randint
-
-#delay de 5 segundos al inicio
-#active color and images
-
-
+from pycountry import countries
+from bs4 import BeautifulSoup as BS
 
 # fnc
 def get_cell_num(x, y):
 	mon_w = 320
 	mon_h = 240
 	if x < mon_w/3:	cx = 0
-
 	elif x > 2*mon_w/3: cx = 2
 	else: cx = 1
 	if y < mon_h/3: cy = 0
@@ -64,8 +46,15 @@ def print_info(cs):
 		print ''
 
 
+mssgs = ['No trending topics',
+			"Fitter, happier",
+			"More productive, comfortable"]
+ims = 0;
+
 ##  --- ----- --- ----- --- ----- ---- ------ ---- --- - -- --- - - -- - - ##
 if __name__ == "__main__":
+	nn_ii = 0
+	caux = 0
 
 	# argparse
 	ap = argparse.ArgumentParser()
@@ -76,19 +65,27 @@ if __name__ == "__main__":
 	args = vars(ap.parse_args())
 
 	# osc
-	send_addr = "192.168.0.13", 8000
+	#send_addr = "192.168.0.13", 8000
 	#cOsc = OSC.OSCClient()
 	#cOsc.connect(send_addr)
-	print "[t]: OSC : ok"
+	#print "[t]: OSC : ok"
 
 	# trends
-	google_username = "xx@gmail.com"
-	google_password = "xxx"
+	google_username = "overdrivenlab@gmail.com"
+	google_password = "0ste0p0r0sis"
 	path = ""
-	kw_list=['temblor', 'terremoto', 'earthquake']
-	pytrend = TrendReq(google_username, google_password, custom_useragent="RenzoTrend Script")
-	pytrend.build_payload(kw_list=kw_list)
-	related_queries_dict = pytrend.related_queries()
+	pytrend = TrendReq(google_username, google_password, hl='es-MX', geo='MX', custom_useragent="RenzoTrend Script")
+	# parse
+	trending_searches = pytrend.trending_searches()
+	articles = trending_searches['newsArticlesList']
+	trends = [BS(ar[0]['title']).text for ar in articles]
+	"""
+	trends = ['Montana Earthquake Is Felt For Hundreds Of Miles Early Thursday',
+			"Blac Chyna flashes ex Rob Kardashian's £200k gifts and poses with another man ...",
+			"Andrew Garfield Faces Backlash After Saying 'I Am a Gay Man Right Now Just ...",
+			"4 accused of fighting with officer on South Side"]
+	"""
+	t0 = time.time()
 	print "[t]: trends : ok"
 
 	# resources
@@ -117,15 +114,18 @@ if __name__ == "__main__":
 
 
 	# pygame
-	disp_w = 1000
-	disp_h = 1000
+	disp_w = 1280
+	disp_h = 720
 
 	pygame.mixer.pre_init(44100, -16, 2, 2048)
 	pygame.init()
 	clock = pygame.time.Clock()
-	screen = pygame.display.setl_mode((1000,1000))
+	screen = pygame.display.set_mode((1280,720))
 	pygame.display.set_caption('[trends]: display')
 	pygame.mouse.set_visible(0)
+
+	s = pygame.Surface((1280, 100))
+	ss = pygame.Surface((1280, 720))
 
 	font = pygame.font.Font("vcr_mono.ttf", 20)
 	text = '[0FF]'
@@ -137,8 +137,6 @@ if __name__ == "__main__":
 	ren = font.render(text, 1, c_w)
 	screen.blit(ren, (disp_w/2 - size[0]/2, disp_h/2 - size[1]/2))
 	pygame.display.update()
-	pygame.display.colorGroup()
-
 	print "[t]: display : 0FF"
 
 	# get sounds
@@ -182,7 +180,7 @@ if __name__ == "__main__":
 		thresh_img = cv2.dilate(frame_delta, None, iterations=2)
 
 		# contours
-		contours, hie = cv2.findContours(thresh_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+		a,contours, hie = cv2.findContours(thresh_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 		big_cnts = [co for co in contours if cv2.contourArea(co) > args['min_area']]
 		big_cnts = sorted(big_cnts, key = cv2.contourArea, reverse = True)
 
@@ -196,8 +194,6 @@ if __name__ == "__main__":
 			cx = int(M['m10']/M['m00'])
 			cy = int(M['m01']/M['m00'])
 			area = cv2.contourArea(cnt)
-			#window colorGroup(main)
-
 
 			# index cells
 			index = get_cell_num(cx, cy)
@@ -211,40 +207,96 @@ if __name__ == "__main__":
 		# update state
 		summ = 0;
 		for i in range(9):
+			# if not occupied turn off
 			if cells[i]['count'] == 0:
 				cells[i]['past'] = 0
 				cells[i]['state'] = 0
+			# if occupied count
 			else:
 				cells[i]['past'] += cells[i]['count']
 				cells[i]['count'] = 0
-				if cells[i]['past'] > 15 and cells[i]['state'] == 0:
-					cells[i]['state'] = 1
-					# seleccionar evento
-					nn_ii = randint(0, len(img_list)-1)
-					nn_tt = randint(0, len(kw_list)-1)
-					nn_ss = randint(0, len(snd_list)-1)
-					kw_tt = kw_list[nn_tt]
-					str_tt = str(related_queries_dict[kw_tt]['top']).split('\n')
-					# actualizar display
-					clock.tick(60)
-					screen.fill(c_b)
-					screen.blit(imgs[nn_ii], (0, 0))
-					yyy = 50;
-					for st in str_tt:
-						size = font.size(st)
-						ren = font.render(st, 1, c_w)
-						screen.blit(ren, (disp_w/2 - size[0]/2, yyy))
-						yyy += 30
-					pygame.display.update()
-					snds[nn_ss].play()
-					#time.sleep(10)
+				# if count>10 fade
+				if cells[i]['past'] > 10:
+					if cells[i]['state'] == 0:
+						cells[i]['state'] = 1
+						# seleccionar evento
+						ant_ii = nn_ii
+						nn_ii = randint(0, len(img_list)-1)
+						nn_tt = randint(0, len(trends)-1)
+						nn_ss = randint(0, len(snd_list)-1)
+						str_tt = trends[nn_tt]
+						fade = 0
+						snds[nn_ss].play()
+					elif cells[i]['past'] < 64:
+						fade = 4*cells[i]['past']
+						clock.tick(60)
+						#screen.fill(c_b)
+						# actualizar display
+						imgs[nn_ii].set_alpha(fade)
+						simg = imgs[nn_ii].get_size()
+						screen.blit(imgs[nn_ii], (disp_w/2-simg[0]/2, 0))
+						# surface
+						s.set_alpha(fade)
+						s.fill((0,0,0))
+						screen.blit(s, (0, disp_h-100))
+						# draw
+						size_text = font.size(str_tt)
+						ren = font.render(str_tt, 1, c_w)
+						screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h-50))
+						pygame.display.update()
 
+					else:
+						fade = 255
+						clock.tick(60)
+						#screen.fill(c_b)
+						simg = imgs[nn_ii].get_size()
+						screen.blit(imgs[nn_ii], (disp_w/2-simg[0]/2, 0))
+						# surface
+						s.fill((0,0,0))
+						screen.blit(s, (0, disp_h-100))
+						# draw
+						size_text = font.size(str_tt)
+						screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h-50))
+						ren = font.render(str_tt, 1, c_w)
+						pygame.display.update()
+					#time.sleep(10)
 				summ +=1;
 		if summ==0:
+			#black changes
 			clock.tick(60)
-			screen.fill(c_b)
+			if caux<255:
+				fade = 255-caux
+			else:
+				fade = caux-255
+			caux += 10
+			if caux>512:
+				caux = 0
+				ims += 1
+				if ims>len(mssgs)-1: ims = 0
+
+			size_text = font.size(mssgs[ims])
+			ren = font.render(mssgs[ims], 1, c_w)
+			screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h-50))
+
+			ss.set_alpha(fade)
+			ss.fill((0,0,0))
+			screen.blit(ss, (0, 0))
 			pygame.display.update()
-		#print_info(cells)
+
+		# update
+		if time.time() - t0 > 120:
+			"""
+			trends = ['Montana Earthquake Is Felt For Hundreds Of Miles Early Thursday',
+			"Blac Chyna flashes ex Rob Kardashian's £200k gifts and poses with another man ...",
+			"Andrew Garfield Faces Backlash After Saying 'I Am a Gay Man Right Now Just ...",
+			"4 accused of fighting with officer on South Side"]
+			"""
+			trending_searches = pytrend.trending_searches()
+			articles = trending_searches['newsArticlesList']
+			trends = [BS(ar[0]['title']).text for ar in articles]
+			
+			t0 = time.time()
+			print "[t]: trends : ok"
 
 		# break?
 		key = cv2.waitKey(1) & 0xFF
