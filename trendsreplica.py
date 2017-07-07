@@ -110,8 +110,8 @@ if __name__ == "__main__":
 
 
 	# pygame
-	disp_w = 1280
-	disp_h = 720
+	disp_w = 1000
+	disp_h = 700
 
 	pygame.mixer.pre_init(44100, -16, 2, 2048)
 	pygame.init()
