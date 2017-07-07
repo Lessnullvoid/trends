@@ -70,7 +70,7 @@ if __name__ == "__main__":
 	google_username = "minimaltecno78b@gmail.com"
 	google_password = "terremoto88"
 	path = ""
-	pytrend = TrendReq(google_username, google_password, hl='es-CH', geo='CH', custom_useragent="RenzoTrend Script")
+	pytrend = TrendReq(google_username, google_password, hl='es-MX', geo='MX', custom_useragent="RenzoTrend Script")
 	# parse
 	trending_searches = pytrend.trending_searches()
 	articles = trending_searches['newsArticlesList']
@@ -217,7 +217,7 @@ if __name__ == "__main__":
 						cells[i]['state'] = 1
 						# seleccionar evento
 						ant_ii = nn_ii
-						nn_ii = randint(0, len(img_list)-1)
+						#nn_ii = randint(0, len(img_list)-1)
 						nn_tt = randint(0, len(trends)-1)
 						nn_ss = randint(0, len(snd_list)-1)
 						str_tt = trends[nn_tt]
@@ -229,9 +229,9 @@ if __name__ == "__main__":
 						screen.set_alpha(fade)
 						#screen.fill((0,0,0))
 						# actualizar display
-						imgs[nn_ii].set_alpha(fade)
-						simg = imgs[nn_ii].get_size()
-						screen.blit(imgs[nn_ii], (disp_w/2-simg[0]/2, 0))
+						#imgs[nn_ii].set_alpha(fade)
+						#simg = imgs[nn_ii].get_size()
+						#screen.blit(imgs[nn_ii], (disp_w/2-simg[0]/2, 0))
 						# surface
 						s.set_alpha(fade)
 						s.fill((0,0,0))
@@ -247,7 +247,7 @@ if __name__ == "__main__":
 						clock.tick(60)
 						#screen.fill(c_b)
 						simg = imgs[nn_ii].get_size()
-						screen.blit(imgs[nn_ii], (disp_w/2-simg[0]/2, 0))
+						#screen.blit(imgs[nn_ii], (disp_w/2-simg[0]/2, 0))
 						# surface
 						s.fill((0,0,0))
 						screen.blit(s, (0, disp_h-100))
@@ -281,7 +281,7 @@ if __name__ == "__main__":
 			screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h/2 - size_text[1]/2))
 
 			ss.set_alpha(fade)
-			ss.fill((255, 255, 255))
+			ss.fill((0, 0, 0))
 			screen.blit(ss, (0, 0))
 			pygame.display.update()
 
