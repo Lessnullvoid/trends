@@ -44,7 +44,13 @@ http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspbe
  ______________________________________________________________________________
 
 **Ejecutar Script para trends**
+#1 - navegar hasta la carpeta
+>cd trends
+#2 -ejecutar el script 
 >sudo python trends.py
 
 **Ejecutar Script para replica**
+#1 - navegar hasta la carpeta
+>cd trends
+#2 -ejecutar el script 
 >sudo python trensreplica.py
