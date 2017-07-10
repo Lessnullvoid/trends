@@ -1,6 +1,6 @@
 
 
-**Librerias y ddependencies**
+**Librerias y dependencies**
 Estos son los programas que se tienen que instalar en la raspberry para poder hacer funcionar el software. 
 Por el momento el clone con el que estamos trabajando ya tiene todo instalado pero en caso de que fuera necesario hacer una instalación desde cero esto es lo que se necesita: 
 
@@ -27,7 +27,7 @@ http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspbe
 
 >sudo dd if=/dev/disk2 of=~/Desktop/raspberrypi.dmg  (recuerda revisar bien el número de disco que arroje el primer comando)
 
-**borra sd card para cargar nueva imagen de disco**
+**Borrar sd card para cargar nueva imagen de disco**
 >sudo diskutil eraseDisk FAT32 RASPBIAN MBRFormat /dev/disk2
 
 **Carcar imagen nueva en la tarjeta limpia**
@@ -46,5 +46,5 @@ http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspbe
 **Ejecutar Script para trends**
 >sudo python trends.py
 
-**ejecutar Script para replica**
+**Ejecutar Script para replica**
 >sudo python trensreplica.py
