@@ -24,8 +24,10 @@ http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspbe
 **Clonar imagen del raspberry**
 
 >diskutil list
+(en la lista va aparecer algo como: /dev/disk2 o /dev/disk1)
 
->sudo dd if=/dev/disk2 of=~/Desktop/raspberrypi.dmg  (recuerda revisar bien el número de disco que arroje el primer comando)
+>sudo dd if=/dev/disk2 of=~/Desktop/raspberrypi.dmg
+(recuerda revisar bien el número de disco que arroje el primer comando)
 
 **Borrar sd card para cargar nueva imagen de disco**
 >sudo diskutil eraseDisk FAT32 RASPBIAN MBRFormat /dev/disk2
