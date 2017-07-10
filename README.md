@@ -37,7 +37,7 @@ http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspbe
 #1 desmontar el disco
 >diskutil unmountDisk /dev/disk2
 
-#2 formaterar
+#2 formatear
 >sudo newfs_msdos -F 16 /dev/disk2
 
 #3 clonar
