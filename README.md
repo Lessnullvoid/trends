@@ -22,14 +22,24 @@ http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspbe
  ______________________________________________________________________________
 
 **Clonar imagen del raspberry**
+#1 Incertar la SD Card de la replica en la mac
 
+#2 ejecturar el comando para buscar el sd card
 >diskutil list
 (en la lista va aparecer algo como: /dev/disk2 o /dev/disk1)
 
+#3 hacer una copia de la imagen 
 >sudo dd if=/dev/disk2 of=~/Desktop/raspberrypi.dmg
 (recuerda revisar bien el número de disco que arroje el primer comando)
 
-**Borrar sd card para cargar nueva imagen de disco**
+#4 cuando termine el proceso de clonación sacar expulsar el sd card.
+
+**Borrar sd card para clonar**
+
+#1 ejecturar el comando para buscar el sd card
+>diskutil list
+
+#2 borrar y formatear 
 >sudo diskutil eraseDisk FAT32 RASPBIAN MBRFormat /dev/disk2
 
 **Carcar imagen nueva en la tarjeta limpia**
