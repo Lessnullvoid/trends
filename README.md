@@ -79,7 +79,7 @@ ______________________________________________________________________________
 5. detener el script
 >ctrl + c 
 
-**Ejecutar Script para replica**
+**Ejecutar Script para replica desde terminal mac**
 
 1. Acceder a la raspberry por la terminal
 > ssh pi@trends1.local 
@@ -96,3 +96,23 @@ ______________________________________________________________________________
 
 5. detener el script
 >ctrl + c 
+
+ ______________________________________________________________________________
+** Actualizar el código desde el repositorio**
+
+1. Acceder a la raspberry por la terminal
+> ssh pi@trends1.local 
+> pass: 1234
+
+2. Navegar hasta la carpeta
+>cd trends
+
+3. Actualizar el código con el siguiente comando 
+> git pull origin 
+
+ ______________________________________________________________________________
+** Apagar - reboot **
+
+> sudo shutdown -h now
+
+> sudo reboot -h now
