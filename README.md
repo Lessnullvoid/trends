@@ -26,13 +26,16 @@ http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspbe
 
 2. ejecturar el comando para buscar el sd card
 > diskutil list
---(en la lista va aparecer algo como: /dev/disk2 o /dev/disk1)--
+
+_(en la lista va aparecer algo como: /dev/disk2 o /dev/disk1)_
 
 3. hacer una copia de la imagen 
 > sudo dd if=/dev/disk2 of=~/Desktop/raspberrypi.dmg
+
 _(recuerda revisar bien el número de disco que arroje el primer comando para hacer la copia correcta)_
 
 4. cuando termine el proceso de clonación sacar expulsar el sd card.
+
 _(el proceso puede tomar entre 30 y 40 minutos todo depende de la computadora)_
 
 **Borrar sd card para clonar**
