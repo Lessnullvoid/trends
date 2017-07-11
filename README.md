@@ -26,15 +26,14 @@ http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspbe
 
 2. ejecturar el comando para buscar el sd card
 > diskutil list
-
-_(en la lista va aparecer algo como: /dev/disk2 o /dev/disk1)
+_(en la lista va aparecer algo como: /dev/disk2 o /dev/disk1)_
 
 3. hacer una copia de la imagen 
 > sudo dd if=/dev/disk2 of=~/Desktop/raspberrypi.dmg
-
-_(recuerda revisar bien el número de disco que arroje el primer comando)
+_(recuerda revisar bien el número de disco que arroje el primer comando para hacer la copia correcta)_
 
 4. cuando termine el proceso de clonación sacar expulsar el sd card.
+_(el proceso puede tomar entre 30 y 40 minutos todo depende de la computadora)_
 
 **Borrar sd card para clonar**
 
@@ -57,18 +56,37 @@ _(recuerda revisar bien el número de disco que arroje el primer comando)
 
  ______________________________________________________________________________
 
-**Ejecutar Script para trends**
+**Ejecutar Script para trends desde terminal mac**
+1. Acceder a la raspberry por la terminal
+> ssh pi@trends1.local 
+> pass: 1234
 
-#1 - navegar hasta la carpeta
+2. navegar hasta la carpeta
 >cd trends
 
-#2 -ejecutar el script 
+3. iniciar la pantalla externa
+> export DIPLAY=:10.0
+
+4. -ejecutar el script 
 >sudo python trends.py
+
+5. detener el script
+>ctrl + c 
 
 **Ejecutar Script para replica**
 
-#1 - navegar hasta la carpeta
+1. Acceder a la raspberry por la terminal
+> ssh pi@trends1.local 
+> pass: 1234
+
+2. navegar hasta la carpeta
 >cd trends
 
-#2 -ejecutar el script 
+3. iniciar la pantalla externa
+> export DIPLAY=:10.0
+
+4. ejecutar el script 
 >sudo python trensreplica.py
+
+5. detener el script
+>ctrl + c 
