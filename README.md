@@ -61,10 +61,22 @@ ______________________________________________________________________________
 > sudo dd if=~/Desktop/raspberrypi.dmg of=/dev/disk2
 
  ______________________________________________________________________________
+ **Cambiar el nombre de la raspberry**
+
+1. Acceder a la raspberry por la terminal
+> ssh pi@trends1.local 
+
+> pass: 1234
+
+2. sudo raspi-config
+
+ ______________________________________________________________________________
+
 
 **Ejecutar Script para trends desde terminal mac**
 1. Acceder a la raspberry por la terminal
 > ssh pi@trends1.local 
+
 > pass: 1234
 
 2. navegar hasta la carpeta
@@ -83,6 +95,7 @@ ______________________________________________________________________________
 
 1. Acceder a la raspberry por la terminal
 > ssh pi@trends1.local 
+
 > pass: 1234
 
 2. navegar hasta la carpeta
@@ -102,6 +115,7 @@ ______________________________________________________________________________
 
 1. Acceder a la raspberry por la terminal
 > ssh pi@trends1.local 
+
 > pass: 1234
 
 2. Navegar hasta la carpeta
