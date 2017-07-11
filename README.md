@@ -21,7 +21,7 @@ http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspbe
 
  ______________________________________________________________________________
 
-**Clonar imagen del raspberry**
+**Clonar imagen del raspberry al escritorio de la mac**
 1. Incertar la SD Card con el sistema operativo funcional en la mac
 
 2. ejecturar el comando para buscar el sd card
@@ -49,7 +49,7 @@ ______________________________________________________________________________
 3. Borrar y formatear 
 > sudo diskutil eraseDisk FAT32 RASPBIAN MBRFormat /dev/disk2
 
-**Carcar imagen nueva en la tarjeta limpia**
+**Cargar clon a una tarjeta limpia**
 
 1. Desmontar el disco
 > diskutil unmountDisk /dev/disk2
