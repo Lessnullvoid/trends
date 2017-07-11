@@ -38,23 +38,26 @@ _(recuerda revisar bien el número de disco que arroje el primer comando para ha
 
 _(el proceso puede tomar entre 30 y 40 minutos todo depende de la computadora)_
 
-**Borrar sd card para clonar**
+______________________________________________________________________________
 
-1. Ejecturar el comando para buscar el sd card
+**Borrar sd card para clonar**
+1. Incertar una tarjeta nueva en la mac
+
+2. Ejecturar el comando para buscar el sd card
 > diskutil list
 
-2. borrar y formatear 
+3. Borrar y formatear 
 > sudo diskutil eraseDisk FAT32 RASPBIAN MBRFormat /dev/disk2
 
 **Carcar imagen nueva en la tarjeta limpia**
 
-1. desmontar el disco
+1. Desmontar el disco
 > diskutil unmountDisk /dev/disk2
 
-2. formatear
+2. Formatear
 > sudo newfs_msdos -F 16 /dev/disk2
 
-3. clonar
+3. Clonar
 > sudo dd if=~/Desktop/raspberrypi.dmg of=/dev/disk2
 
  ______________________________________________________________________________
