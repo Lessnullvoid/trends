@@ -26,7 +26,7 @@ http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspbe
 
 2. ejecturar el comando para buscar el sd card
 > diskutil list
-<_(en la lista va aparecer algo como: /dev/disk2 o /dev/disk1)_>
+--(en la lista va aparecer algo como: /dev/disk2 o /dev/disk1)--
 
 3. hacer una copia de la imagen 
 > sudo dd if=/dev/disk2 of=~/Desktop/raspberrypi.dmg
