@@ -98,7 +98,7 @@ ______________________________________________________________________________
 >ctrl + c 
 
  ______________________________________________________________________________
-** Actualizar el código desde el repositorio**
+**Actualizar el código desde el repositorio**
 
 1. Acceder a la raspberry por la terminal
 > ssh pi@trends1.local 
@@ -111,7 +111,7 @@ ______________________________________________________________________________
 > git pull origin 
 
  ______________________________________________________________________________
-** Apagar - reboot **
+**Apagar - reboot**
 
 > sudo shutdown -h now
 
