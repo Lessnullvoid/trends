@@ -22,11 +22,14 @@ http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspbe
  ______________________________________________________________________________
 
 **NUEVAS LIBRERIAS PARA INSTALAR ANTES DE USAR**
+
 1 - instalar esta versión de pytrends
->pip install pytrends
+
+> pip install pytrends
 
 2 - instalar pyosc
-pip install python-osc
+
+> pip install python-osc
 
  ______________________________________________________________________________
 
