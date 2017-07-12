@@ -21,6 +21,15 @@ http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspbe
 
  ______________________________________________________________________________
 
+**NUEVAS LIBRERIAS PARA INSTALAR ANTES DE USAR**
+1 - instalar esta versión de pytrends
+>pip install pytrends
+
+2 - instalar pyosc
+pip install python-osc
+
+ ______________________________________________________________________________
+
 **Clonar imagen del raspberry al escritorio de la mac**
 1. Incertar la SD Card con el sistema operativo funcional en la mac
 
