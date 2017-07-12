@@ -2,18 +2,25 @@
 # -*-coding: UTF-8 -*-
 
 """
-trendyWindows
-. divide el campo visual en 9 ventanas
-. vigila la presencia de contours en cada una de ellas
-. cuando encuentra algo en una celda despliega trendyinfo
+trends_A.py
+----------
+. connect to GtrendsAPI
+. dual mode: active, stand by
+.active mode:
+	.check for presence on 3x3 webcam grid
+	.when something present select trend, image, sound and display
+	.also send message to trendsB.oy
+.stand by:
+	.alternatively fades from white
+	.to color + centered trend text
+
 """
 
 # packages
 from pytrends.request import TrendReq
 import numpy as np
 import sys, time
-#import OSC,
-import pygame
+import OSC, pygame
 from pygame.locals import *
 import argparse, cv2
 from glob import glob
@@ -42,8 +49,18 @@ def print_info(cs):
 			print '['+str(cs[index]["count"])+']\t',
 		print ''
 
+def send_actual(cell_no, trend_str, cOsc):
+	"""form and send osc messahe"""
+	route = "/cell/"+str(cell_no)+"/"
+	d = str(trend_str)
+	msg = OSC.OSCMessage()
+	msg.setAddress(route)
+	msg.append(d)
+	cOsc.send(msg)
+	print "[OSC]: " + "<<" + route + "::" + d
 
-colors = [(12, 170, 66), (6, 147, 54), (51, 175, 93)]
+
+colors = [(60, 186, 84), (244, 194, 13), (219, 50, 54), (72, 133, 237)]
 ims = 0;
 cc = colors[0]
 
@@ -61,20 +78,22 @@ if __name__ == "__main__":
 	args = vars(ap.parse_args())
 
 	# osc
-	#send_addr = "192.168.0.13", 8000
-	#cOsc = OSC.OSCClient()
-	#cOsc.connect(send_addr)
-	#print "[t]: OSC : ok"
+	send_addr = "192.168.2.200", 8666
+	cOsc = OSC.OSCClient()
+	cOsc.connect(send_addr)
+	print "[t]: OSC : ok"
 
 	# trends
-	google_username = "minimaltecno78b@gmail.com"
-	google_password = "terremoto88"
+	google_username = "overdrivenlab@gmail.com"
+	google_password = "0ste0p0r0sis"
 	path = ""
-	pytrend = TrendReq(google_username, google_password, hl='es-CH', geo='CH', custom_useragent="RenzoTrend Script")
+	pytrend = TrendReq(google_username, google_password, hl='es-MX', geo='MX', custom_useragent="RenzoTrend Script")
 	# parse
 	trending_searches = pytrend.trending_searches()
-	articles = trending_searches['newsArticlesList']
-	trends = [BS(ar[0]['title']).text for ar in articles]
+	#articles = trending_searches['newsArticlesList']
+	#trends = [BS(ar[0]['title'], "lxml").text for ar in articles]
+	articles = trending_searches['title']
+	trends = articles
 	"""
 	trends = ['Montana Earthquake Is Felt For Hundreds Of Miles Early Thursday',
 			"Blac Chyna flashes ex Rob Kardashian's £200k gifts and poses with another man ...",
@@ -84,19 +103,13 @@ if __name__ == "__main__":
 	t0 = time.time()
 	print "[t]: trends : ok"
 
-	# resources
+	# resources directories
 	img_list = glob(args['img_dir'] + "*.*")
 	snd_list = glob(args['snd_dir'] + "*.*")
-	# get images
-	imgs = []
-	for img_name in img_list:
-		imgs.append( pygame.image.load(img_name) )
-	print "[t]: img_list :"+str(len(img_list))
 
-	# source
+	# monitor/video source
 	mon_w = 320
 	mon_h = 240
-
 	is_cam = True if (args['video'] == None) else False
 	if (is_cam):
 		cam = cv2.VideoCapture(0)
@@ -108,11 +121,9 @@ if __name__ == "__main__":
 	ff = None
 	print "[t]: source :" + "CAM" if is_cam else "VIDEO"
 
-
-	# pygame
+	# display/pygame init
 	disp_w = 1280
 	disp_h = 720
-
 	pygame.mixer.pre_init(44100, -16, 2, 2048)
 	pygame.init()
 	clock = pygame.time.Clock()
@@ -123,7 +134,7 @@ if __name__ == "__main__":
 	s = pygame.Surface((disp_w, 100))
 	ss = pygame.Surface((disp_w, disp_h))
 
-	font = pygame.font.Font("Roboto-Regular.ttf", 35)
+	font = pygame.font.Font("Roboto-Regular.ttf", 56)
 	text = '[0FF]'
 	size = font.size(text)
 	c_w = 250, 240, 230
@@ -134,6 +145,12 @@ if __name__ == "__main__":
 	screen.blit(ren, (disp_w/2 - size[0]/2, disp_h/2 - size[1]/2))
 	pygame.display.update()
 	print "[t]: display : 0FF"
+
+	# get images
+	imgs = []
+	for img_name in img_list:
+		imgs.append( pygame.image.load(img_name) )
+	print "[t]: img_list :"+str(len(img_list))
 
 	# get sounds
 	snds = []
@@ -149,40 +166,34 @@ if __name__ == "__main__":
 
 	# .the loop
 	while True:
+		# ----- ----- ------ ----- ----- DETECT PRESENCE
 		# get frame
 		grabbed, frame = cam.read() if is_cam else vid.read()
 		text = "OFF"
-
 		# video end?
 		if not grabbed:
 			break
-
 		# resize, grayscale, blur
 		gray_img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 		gray_img = cv2.resize(gray_img, (mon_w, mon_h))
 		gray_img = cv2.GaussianBlur(gray_img, (21, 21), 0)
-
 		# first frame?
 		if ff is None:
 			ff = gray_img
 			continue
-
-		# diffs
-		frame_delta = cv2.absdiff(ff, gray_img)
-
+		# find differences
+		#frame_delta = cv2.absdiff(ff, gray_img)
 		frame_delta = ff - gray_img
 		frame_delta = cv2.inRange(frame_delta, 10, 200)
 		#th, thresh_img = cv2.threshold(frame_delta, 25, 255, cv2.THRESH_BINARY)
 		thresh_img = cv2.dilate(frame_delta, None, iterations=2)
-
 		# contours
-		contours, hie = cv2.findContours(thresh_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+		a,contours, hie = cv2.findContours(thresh_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 		big_cnts = [co for co in contours if cv2.contourArea(co) > args['min_area']]
 		big_cnts = sorted(big_cnts, key = cv2.contourArea, reverse = True)
-
+		# init cells
 		for i in range(9):
 			cells[i]['count'] = 0
-
 		# loop over the contours
 		for cnt in big_cnts:
 			# locate by centroids
@@ -190,15 +201,13 @@ if __name__ == "__main__":
 			cx = int(M['m10']/M['m00'])
 			cy = int(M['m01']/M['m00'])
 			area = cv2.contourArea(cnt)
-
 			# index cells
 			index = get_cell_num(cx, cy)
 			cells[index]['count'] += 1
-
-			# draw monitor
+			# rectangles
 			cv2.rectangle(frame_delta, (cx-10, cy-10), (cx+20, cy+20), (255,255,255))
+		# draw monitor
 		cv2.imshow("[trends]: monitor", frame_delta)
-
 		print_info(cells)
 		# update state
 		summ = 0;
@@ -223,6 +232,8 @@ if __name__ == "__main__":
 						str_tt = trends[nn_tt]
 						fade = 0
 						snds[nn_ss].play()
+						# send OSC
+						send_actual(i, str_tt, cOsc)
 					elif cells[i]['past'] < 255:
 						fade = cells[i]['past']
 						clock.tick(60)
@@ -239,7 +250,7 @@ if __name__ == "__main__":
 						# draw
 						size_text = font.size(str_tt)
 						ren = font.render(str_tt, 1, c_w)
-						screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h-50))
+						screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h-80))
 						pygame.display.update()
 
 					else:
@@ -253,7 +264,7 @@ if __name__ == "__main__":
 						screen.blit(s, (0, disp_h-100))
 						# draw
 						size_text = font.size(str_tt)
-						screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h-50))
+						screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h-80))
 						ren = font.render(str_tt, 1, c_w)
 						pygame.display.update()
 					#time.sleep(10)
@@ -266,7 +277,7 @@ if __name__ == "__main__":
 			clock.tick(60)
 			if t<255: fade = 255-t
 			else: fade =t-255
-			t += 1
+			t += 16
 			if t>512:
 				t = 0
 				cc = colors[randint(0, len(colors)-1)]
@@ -293,12 +304,18 @@ if __name__ == "__main__":
 			"Andrew Garfield Faces Backlash After Saying 'I Am a Gay Man Right Now Just ...",
 			"4 accused of fighting with officer on South Side"]
 			"""
-			trending_searches = pytrend.trending_searches()
-			articles = trending_searches['newsArticlesList']
-			trends = [BS(ar[0]['title']).text for ar in articles]
+			try:
+				trending_searches = pytrend.trending_searches()
+				#articles = trending_searches['newsArticlesList']
+				#trends = [BS(ar[0]['title'], "lxml").text for ar in articles]
+				articles = trending_searches['title']
+				trends = articles
+
+				print "[t]: trends : ok"
+			except:
+				print "[x]: trends : could not update trends"
 
 			t0 = time.time()
-			print "[t]: trends : ok"
 
 		# break?
 		key = cv2.waitKey(1) & 0xFF
