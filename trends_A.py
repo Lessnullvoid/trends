@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/python 
 # -*-coding: UTF-8 -*-
 
 """
@@ -51,10 +51,11 @@ def print_info(cs):
 
 def send_actual(cell_no, trend_str, cOsc):
 	"""form and send osc messahe"""
-	route = "/cell/"+str(cell_no)+"/"
+	route = "/cell"
 	d = str(trend_str)
 	msg = OSC.OSCMessage()
 	msg.setAddress(route)
+	msg.append(cell_no)
 	msg.append(d)
 	cOsc.send(msg)
 	print "[OSC]: " + "<<" + route + "::" + d
@@ -78,11 +79,12 @@ if __name__ == "__main__":
 	args = vars(ap.parse_args())
 
 	# osc
-	send_addr = "192.168.2.200", 8666
+	send_addr = "127.0.0.1", 10001
 	cOsc = OSC.OSCClient()
 	cOsc.connect(send_addr)
 	print "[t]: OSC : ok"
 
+	
 	# trends
 	google_username = "overdrivenlab@gmail.com"
 	google_password = "0ste0p0r0sis"
@@ -106,7 +108,7 @@ if __name__ == "__main__":
 	# resources directories
 	img_list = glob(args['img_dir'] + "*.*")
 	snd_list = glob(args['snd_dir'] + "*.*")
-
+	
 	# monitor/video source
 	mon_w = 320
 	mon_h = 240
@@ -207,7 +209,7 @@ if __name__ == "__main__":
 			# rectangles
 			cv2.rectangle(frame_delta, (cx-10, cy-10), (cx+20, cy+20), (255,255,255))
 		# draw monitor
-		cv2.imshow("[trends]: monitor", frame_delta)
+		cv2.imshow("[trends]: monitor", frame_delta)		
 		print_info(cells)
 		# update state
 		summ = 0;
@@ -221,7 +223,7 @@ if __name__ == "__main__":
 				cells[i]['past'] += cells[i]['count']
 				cells[i]['count'] = 0
 				# if count>10 fade
-				if cells[i]['past'] > 10:
+				if cells[i]['past'] > 10:  
 					if cells[i]['state'] == 0:
 						cells[i]['state'] = 1
 						# seleccionar evento
@@ -229,7 +231,7 @@ if __name__ == "__main__":
 						nn_ii = randint(0, len(img_list)-1)
 						nn_tt = randint(0, len(trends)-1)
 						nn_ss = randint(0, len(snd_list)-1)
-						str_tt = trends[nn_tt]
+						str_tt = trends[nn_tt] 
 						fade = 0
 						snds[nn_ss].play()
 						# send OSC
@@ -290,12 +292,12 @@ if __name__ == "__main__":
 			size_text = font.size(trends[ims])
 			ren = font.render(trends[ims], 1, c_w)
 			screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h/2 - size_text[1]/2))
-
+			
 			ss.set_alpha(fade)
 			ss.fill((255, 255, 255))
 			screen.blit(ss, (0, 0))
 			pygame.display.update()
-
+		
 		# update cada hora
 		if time.time() - t0 > 3620:
 			"""
@@ -314,7 +316,7 @@ if __name__ == "__main__":
 				print "[t]: trends : ok"
 			except:
 				print "[x]: trends : could not update trends"
-
+			
 			t0 = time.time()
 
 		# break?
