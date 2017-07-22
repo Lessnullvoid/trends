@@ -26,9 +26,7 @@ import argparse, cv2
 from glob import glob
 from random import randint
 from bs4 import BeautifulSoup as BS
-import sys
 
-sys.path.append('/usr/local/lib/python2.7/site-packages')
 
 # fnc
 def get_cell_num(x, y):
