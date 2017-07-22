@@ -90,7 +90,7 @@ if __name__ == "__main__":
 	google_username = "minimaltecno78b@gmail.com"
 	google_password = "terremoto88"
 	path = ""
-	pytrend = TrendReq(google_username, google_password, hl='en-US', geo='US', custom_useragent="RenzoTrend Script")
+	pytrend = TrendReq(google_username, google_password, hl='es-CL', geo='CL', custom_useragent="RenzoTrend Script")
 	# parse
 	trending_searches = pytrend.trending_searches()
 	#articles = trending_searches['newsArticlesList']
@@ -115,7 +115,7 @@ if __name__ == "__main__":
 	mon_h = 240
 	is_cam = True if (args['video'] == None) else False
 	if (is_cam):
-		cam = cv2.VideoCapture(0)
+		cam = cv2.VideoCapture(1)
 		time.sleep(1)
 		grabbed, frame = cam.read()
 	else:
