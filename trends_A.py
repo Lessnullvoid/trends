@@ -185,7 +185,7 @@ if __name__ == "__main__":
 			ff = gray_img
 			continue
 		# find differences
-		#frame_delta = cv2.absdiff(ff, gray_img)
+		frame_delta = cv2.absdiff(ff, gray_img)
 		#frame_delta = ff - gray_img
 		frame_delta = cv2.inRange(frame_delta, 10, 200)
 		#th, thresh_img = cv2.threshold(frame_delta, 25, 255, cv2.THRESH_BINARY)
