@@ -82,7 +82,7 @@ if __name__ == "__main__":
 	args = vars(ap.parse_args())
 
 	# osc
-	recv_addr = "192.168.1.120", 10001
+	recv_addr = "192.168.1.37", 10001
 	s = OSC.OSCServer(recv_addr)
 	s.addMsgHandler('/cell', cell_callback)
 	st = threading.Thread(target=s.serve_forever)
