@@ -57,7 +57,7 @@ def send_actual(cell_no, trend_str, cOsc):
 	msg.setAddress(route)
 	msg.append(cell_no)
 	msg.append(d)
-	cOsc.send(msg)
+	#cOsc.send(msg)
 	print "[OSC]: " + "<<" + route + "::" + d
 
 
