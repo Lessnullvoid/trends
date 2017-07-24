@@ -80,7 +80,7 @@ if __name__ == "__main__":
 	args = vars(ap.parse_args())
 
 	# osc
-	send_addr = "192.168.1.37", 10001
+	send_addr = "127.0.0.1", 10001
 	cOsc = OSC.OSCClient()
 	cOsc.connect(send_addr)
 	print "[t]: OSC : ok"
@@ -185,8 +185,8 @@ if __name__ == "__main__":
 			ff = gray_img
 			continue
 		# find differences
-		frame_delta = cv2.absdiff(ff, gray_img)
-		#frame_delta = ff - gray_img
+		#frame_delta = cv2.absdiff(ff, gray_img)
+		frame_delta = ff - gray_img
 		frame_delta = cv2.inRange(frame_delta, 10, 200)
 		#th, thresh_img = cv2.threshold(frame_delta, 25, 255, cv2.THRESH_BINARY)
 		thresh_img = cv2.dilate(frame_delta, None, iterations=2)
