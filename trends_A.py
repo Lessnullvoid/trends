@@ -114,7 +114,7 @@ if __name__ == "__main__":
 	mon_h = 240
 	is_cam = True if (args['video'] == None) else False
 	if (is_cam):
-		cam = cv2.VideoCapture(0)
+		cam = cv2.VideoCapture(1)
 		time.sleep(1)
 		grabbed, frame = cam.read()
 	else:
