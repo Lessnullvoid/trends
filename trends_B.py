@@ -1,4 +1,4 @@
-#! /usr/bin/python 
+#! /usr/bin/python
 # -*-coding: UTF-8 -*-
 
 """
@@ -80,7 +80,7 @@ if __name__ == "__main__":
 	args = vars(ap.parse_args())
 
 	# osc
-	recv_addr = "127.0.0.1", 10001
+	recv_addr = "192.168.1.37", 10001
 	s = OSC.OSCServer(recv_addr)
 	s.addMsgHandler('/cell', cell_callback)
 	st = threading.Thread(target=s.serve_forever)
@@ -93,7 +93,7 @@ if __name__ == "__main__":
 
 	# resources directories
 	snd_list = glob(args['snd_dir'] + "*.*")
-	
+
 	# display/pygame init
 	disp_w = 1280
 	disp_h = 720
@@ -149,12 +149,12 @@ if __name__ == "__main__":
 		else:
 			size_text = font.size("0---0")
 			ren = font.render("0---0", 1, c_w)
-		
-		if (len(trends)>5): 
+
+		if (len(trends)>5):
 			trends = trends[-5:]
 
 		screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h/2 - size_text[1]/2))
-		
+
 		ss.set_alpha(fade)
 		ss.fill((255, 255, 255))
 		screen.blit(ss, (0, 0))
