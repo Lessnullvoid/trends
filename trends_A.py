@@ -16,6 +16,7 @@ trends_A.py
 
 """
 
+
 # packages
 from pytrends.request import TrendReq
 import numpy as np
@@ -124,8 +125,8 @@ if __name__ == "__main__":
 	print "[t]: source :" + "CAM" if is_cam else "VIDEO"
 
 	# display/pygame init
-	disp_w = 1280
-	disp_h = 720
+	disp_w = 800
+	disp_h = 700
 	pygame.mixer.pre_init(44100, -16, 2, 2048)
 	pygame.init()
 	clock = pygame.time.Clock()
