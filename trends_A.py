@@ -27,7 +27,6 @@ from glob import glob
 from random import randint
 from bs4 import BeautifulSoup as BS
 
-
 # fnc
 def get_cell_num(x, y):
 	mon_w = 320
@@ -80,7 +79,7 @@ if __name__ == "__main__":
 	args = vars(ap.parse_args())
 
 	# osc
-	send_addr = "local host", 10001
+	send_addr = "127.0.0.1", 10001
 	cOsc = OSC.OSCClient()
 	cOsc.connect(send_addr)
 	print "[t]: OSC : ok"
@@ -90,7 +89,7 @@ if __name__ == "__main__":
 	google_username = "minimaltecno78b@gmail.com"
 	google_password = "terremoto88"
 	path = ""
-	pytrend = TrendReq(google_username, google_password, hl='es-CL', geo='CL', custom_useragent="RenzoTrend Script")
+	pytrend = TrendReq(google_username, google_password, hl='es-MX', geo='MX', custom_useragent="RenzoTrend Script")
 	# parse
 	trending_searches = pytrend.trending_searches()
 	#articles = trending_searches['newsArticlesList']
@@ -191,7 +190,7 @@ if __name__ == "__main__":
 		#th, thresh_img = cv2.threshold(frame_delta, 25, 255, cv2.THRESH_BINARY)
 		thresh_img = cv2.dilate(frame_delta, None, iterations=2)
 		# contours
-		contours, hie = cv2.findContours(thresh_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+		a,contours, hie = cv2.findContours(thresh_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 		big_cnts = [co for co in contours if cv2.contourArea(co) > args['min_area']]
 		big_cnts = sorted(big_cnts, key = cv2.contourArea, reverse = True)
 		# init cells
