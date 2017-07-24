@@ -27,6 +27,13 @@ from glob import glob
 from random import randint
 from bs4 import BeautifulSoup as BS
 
+# osc
+send_addr = "127.0.0.1", 10001
+cOsc = OSC.OSCClient()
+cOsc.connect(send_addr)
+print "[t]: OSC : ok"
+
+
 # fnc
 def get_cell_num(x, y):
 	mon_w = 320
@@ -77,13 +84,6 @@ if __name__ == "__main__":
 	ap.add_argument("-i", "--img-dir", 			  default="./img/", help="image dir path")
 	ap.add_argument("-s", "--snd-dir", 			  default="./snd/", help="sound dir path")
 	args = vars(ap.parse_args())
-
-	# osc
-	send_addr = "127.0.0.1", 10001
-	cOsc = OSC.OSCClient()
-	cOsc.connect(send_addr)
-	print "[t]: OSC : ok"
-
 
 	# trends
 	google_username = "minimaltecno78b@gmail.com"
