@@ -101,8 +101,8 @@ if __name__ == "__main__":
 	cOsc.connect(send_addr)
 	print "[t]: OSC : ok"
 	# trends
-	google_username = "XXXXX"
-	google_password = "XXXXX"
+	google_username = "minimaltecno78b@gmail.com"
+	google_password = "terremoto88"
 	path = ""
 	pytrend = TrendReq(google_username, google_password, hl='es-MX', geo='MX', custom_useragent="RenzoTrend Script")
 	# parse
