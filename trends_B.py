@@ -13,8 +13,6 @@ trends_B.py
 	.alternatively fades from white
 	.to color + centered trend text
 
-
-
 """
 
 # packages
@@ -63,6 +61,24 @@ def cell_callback(path, tags, args, source):
 	trends.append(args[1])
 	return
 
+def splitlines (t):
+	if len(t)<20:
+		return 1, [str(t)]
+	elif len(t)>20 and len(t)<40:
+		ls = t.split(' ')
+		h = len(ls)
+		a = ' '.join(ls[:int(h/2)])
+		b = ' '.join(ls[int(h/2):])
+		return 2, [str(a), str(b)]
+	else:
+		ls = t.split(' ')
+		h = len(ls)
+		a = ' '.join(ls[:int(h/3)])
+		b = ' '.join(ls[int(h/3):int(2*h/3)])
+		c = ' '.join(ls[int(2*h/3):])
+		return 3, [str(a), str(b), str(c)]
+
+
 colors = [(60, 186, 84), (244, 194, 13), (219, 50, 54), (72, 133, 237)]
 ims = 0;
 cc = colors[0]
@@ -82,7 +98,7 @@ if __name__ == "__main__":
 	args = vars(ap.parse_args())
 
 	# osc
-	recv_addr = "192.168.1.37", 10001
+	recv_addr = "127.0.0.1", 10001
 	s = OSC.OSCServer(recv_addr)
 	s.addMsgHandler('/cell', cell_callback)
 	st = threading.Thread(target=s.serve_forever)
@@ -102,14 +118,15 @@ if __name__ == "__main__":
 	pygame.mixer.pre_init(44100, -16, 2, 2048)
 	pygame.init()
 	clock = pygame.time.Clock()
-	screen = pygame.display.set_mode((disp_w, disp_h))
+	#screen = pygame.display.set_mode((disp_w, disp_h))
+	screen = pygame.display.set_mode((disp_w, disp_h), pygame.FULLSCREEN)
 	pygame.display.set_caption('[trends]: display')
 	pygame.mouse.set_visible(0)
 
-	s = pygame.Surface((disp_w, 100))
+	s = pygame.Surface((disp_w, 110))
 	ss = pygame.Surface((disp_w, disp_h))
 
-	font = pygame.font.Font("Roboto-Regular.ttf", 56)
+	font = pygame.font.Font("Roboto-Regular.ttf", 90)
 	text = '[0FF]'
 	size = font.size(text)
 	c_w = 250, 240, 230
@@ -134,9 +151,10 @@ if __name__ == "__main__":
 		#go white
 		clock.tick(60)
 		if t<255: fade = 255-t
-		else: fade =t-255
-		t += 16
-		if t>512:
+		elif t>512: fade = t-512
+		else: fade = 0
+		t += 16											#this controls fade velocity
+		if t>767:
 			t = 0
 			cc = colors[randint(0, len(colors)-1)]
 			if (len(trends)>0 and ims<len(trends)):
@@ -146,24 +164,28 @@ if __name__ == "__main__":
 		screen.fill(cc)
 
 		if (len(trends)>0):
-			size_text = font.size(trends[-1])
-			ren = font.render(trends[-1], 1, c_w)
+			line_tt = trends[ims]
+			n_tt, strs_tt = splitlines(line_tt)
+			for n,str_tt in enumerate(strs_tt):
+				size_text = font.size(str_tt)
+				ren = font.render(str_tt, 1, c_w)
+				screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h/2 - (1-n)*size_text[1]))
 		else:
-			size_text = font.size("0---0")
-			ren = font.render("0---0", 1, c_w)
+			size_text = font.size("[0FF]")
+			ren = font.render("[0FF]", 1, c_w)
+			screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h/2 - size_text[1]/2))
 
-		if (len(trends)>5):
-			trends = trends[-5:]
+		if (len(trends)>10):
+			trends = trends[-10:]
 
-		screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h/2 - size_text[1]/2))
 
 		ss.set_alpha(fade)
 		ss.fill((255, 255, 255))
 		screen.blit(ss, (0, 0))
 		pygame.display.update()
-		pygame.event.get()
 
 		# break?
+		pygame.event.get()
 		key = cv2.waitKey(1) & 0xFF
 		if key == ord('n'):
 			ff = gray_img

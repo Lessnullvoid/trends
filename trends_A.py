@@ -16,7 +16,6 @@ trends_A.py
 
 """
 
-
 # packages
 from pytrends.request import TrendReq
 import numpy as np
@@ -58,8 +57,25 @@ def send_actual(cell_no, trend_str, cOsc):
 	msg.setAddress(route)
 	msg.append(cell_no)
 	msg.append(d)
-	#cOsc.send(msg)
+	cOsc.send(msg)
 	print "[OSC]: " + "<<" + route + "::" + d
+
+def splitlines (t):
+	if len(t)<20:
+		return 1, [str(t)]
+	elif len(t)>20 and len(t)<40:
+		ls = t.split(' ')
+		h = len(ls)
+		a = ' '.join(ls[:int(h/2)])
+		b = ' '.join(ls[int(h/2):])
+		return 2, [str(a), str(b)]
+	else:
+		ls = t.split(' ')
+		h = len(ls)
+		a = ' '.join(ls[:int(h/3)])
+		b = ' '.join(ls[int(h/3):int(2*h/3)])
+		c = ' '.join(ls[int(2*h/3):])
+		return 3, [str(a), str(b), str(c)]
 
 
 colors = [(60, 186, 84), (244, 194, 13), (219, 50, 54), (72, 133, 237)]
@@ -80,15 +96,13 @@ if __name__ == "__main__":
 	args = vars(ap.parse_args())
 
 	# osc
-	send_addr = "192.168.1.38", 10001
+	send_addr = "127.0.0.1", 10001
 	cOsc = OSC.OSCClient()
 	cOsc.connect(send_addr)
 	print "[t]: OSC : ok"
-
-
 	# trends
-	google_username = "overdrivenlab@gmail.com"
-	google_password = "0ste0p0r0sis"
+	google_username = "XXXXX"
+	google_password = "XXXXX"
 	path = ""
 	pytrend = TrendReq(google_username, google_password, hl='es-MX', geo='MX', custom_useragent="RenzoTrend Script")
 	# parse
@@ -99,9 +113,12 @@ if __name__ == "__main__":
 	trends = articles
 	"""
 	trends = ['Montana Earthquake Is Felt For Hundreds Of Miles Early Thursday',
-			"Blac Chyna flashes ex Rob Kardashian's £200k gifts and poses with another man ...",
+			"Blac Chyna flashes ex Rob Kardashian's £200k gifts and poses with another man with another man ...",
 			"Andrew Garfield Faces Backlash After Saying 'I Am a Gay Man Right Now Just ...",
-			"4 accused of fighting with officer on South Side"]
+			"4 accused of fighting with officer on South Side",
+			"Helado NEgro",
+			"Private Energy",
+			"Bardo Pond"]
 	"""
 	t0 = time.time()
 	print "[t]: trends : ok"
@@ -125,19 +142,20 @@ if __name__ == "__main__":
 	print "[t]: source :" + "CAM" if is_cam else "VIDEO"
 
 	# display/pygame init
-	disp_w = 800
-	disp_h = 700
+	disp_w = 1280
+	disp_h = 720
 	pygame.mixer.pre_init(44100, -16, 2, 2048)
 	pygame.init()
 	clock = pygame.time.Clock()
-	screen = pygame.display.set_mode((disp_w, disp_h))
+	#screen = pygame.display.set_mode((disp_w, disp_h))
+	screen = pygame.display.set_mode((disp_w, disp_h), pygame.FULLSCREEN)
 	pygame.display.set_caption('[trends]: display')
 	pygame.mouse.set_visible(0)
 
-	s = pygame.Surface((disp_w, 100))
+	s = pygame.Surface((disp_w, 110))
 	ss = pygame.Surface((disp_w, disp_h))
 
-	font = pygame.font.Font("Roboto-Regular.ttf", 56)
+	font = pygame.font.Font("Roboto-Regular.ttf", 90)
 	text = '[0FF]'
 	size = font.size(text)
 	c_w = 250, 240, 230
@@ -191,7 +209,7 @@ if __name__ == "__main__":
 		#th, thresh_img = cv2.threshold(frame_delta, 25, 255, cv2.THRESH_BINARY)
 		thresh_img = cv2.dilate(frame_delta, None, iterations=2)
 		# contours
-		contours, hie = cv2.findContours(thresh_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+		a,contours, hie = cv2.findContours(thresh_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 		big_cnts = [co for co in contours if cv2.contourArea(co) > args['min_area']]
 		big_cnts = sorted(big_cnts, key = cv2.contourArea, reverse = True)
 		# init cells
@@ -210,7 +228,7 @@ if __name__ == "__main__":
 			# rectangles
 			cv2.rectangle(frame_delta, (cx-10, cy-10), (cx+20, cy+20), (255,255,255))
 		# draw monitor
-		cv2.imshow("[trends]: monitor", frame_delta)
+		cv2.imshow("[trends]: monitor", frame_delta)		#comment this line to hide monitor window
 		print_info(cells)
 		# update state
 		summ = 0;
@@ -232,14 +250,20 @@ if __name__ == "__main__":
 						nn_ii = randint(0, len(img_list)-1)
 						nn_tt = randint(0, len(trends)-1)
 						nn_ss = randint(0, len(snd_list)-1)
-						str_tt = trends[nn_tt]
+						line_tt = trends[nn_tt]
+						n_tt, strs_tt = splitlines(line_tt)
 						fade = 0
 						snds[nn_ss].play()
 						# send OSC
-						send_actual(i, str_tt, cOsc)
+						send_actual(i, line_tt, cOsc)
 					elif cells[i]['past'] < 255:
 						fade = cells[i]['past']
 						clock.tick(60)
+						#background
+						ss.set_alpha(fade)
+						ss.fill((0,0,0))
+						screen.blit(ss, (0, 0))
+						#img
 						screen.set_alpha(fade)
 						#screen.fill((0,0,0))
 						# actualizar display
@@ -247,13 +271,23 @@ if __name__ == "__main__":
 						simg = imgs[nn_ii].get_size()
 						screen.blit(imgs[nn_ii], (disp_w/2-simg[0]/2, 0))
 						# surface
-						s.set_alpha(fade)
-						s.fill((0,0,0))
-						screen.blit(s, (0, disp_h-100))
+						#s.set_alpha(fade)
+						#s.fill((0,0,0))
+						#screen.blit(s, (0, disp_h-100))
 						# draw
-						size_text = font.size(str_tt)
-						ren = font.render(str_tt, 1, c_w)
-						screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h-80))
+						for n,str_tt in enumerate(strs_tt):
+							size_text = font.size(str_tt)
+							#surface
+							s.set_alpha(fade)
+							s.fill((0,0,0))
+							#text
+							ren = font.render(str_tt, 1, c_w)
+							distache = 0
+							if n_tt==3: distache = disp_h-(3-n)*size_text[1]
+							if n_tt==2: distache = disp_h-(2-n)*size_text[1]
+							if n_tt==1: distache = disp_h-(1-n)*size_text[1]
+							screen.blit(s, (0, distache))
+							screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
 
 					else:
@@ -263,12 +297,22 @@ if __name__ == "__main__":
 						simg = imgs[nn_ii].get_size()
 						screen.blit(imgs[nn_ii], (disp_w/2-simg[0]/2, 0))
 						# surface
-						s.fill((0,0,0))
-						screen.blit(s, (0, disp_h-100))
+						#s.fill((0,0,0))
+						#screen.blit(s, (0, disp_h-100))
 						# draw
-						size_text = font.size(str_tt)
-						screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h-80))
-						ren = font.render(str_tt, 1, c_w)
+						for n,str_tt in enumerate(strs_tt):
+							size_text = font.size(str_tt)
+							#surface
+							s.set_alpha(fade)
+							s.fill((0,0,0))
+							#text
+							ren = font.render(str_tt, 1, c_w)
+							distache = 0
+							if n_tt==3: distache = disp_h-(3-n)*size_text[1]
+							if n_tt==2: distache = disp_h-(2-n)*size_text[1]
+							if n_tt==1: distache = disp_h-(1-n)*size_text[1]
+							screen.blit(s, (0, distache))
+							screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
 					#time.sleep(10)
 				summ +=1;
@@ -279,9 +323,10 @@ if __name__ == "__main__":
 			#go white
 			clock.tick(60)
 			if t<255: fade = 255-t
-			else: fade =t-255
-			t += 16
-			if t>512:
+			elif t>512: fade = t-512
+			else: fade = 0
+			t += 16											#this controls fade velocity
+			if t>767:
 				t = 0
 				cc = colors[randint(0, len(colors)-1)]
 				ims += 1
@@ -290,10 +335,16 @@ if __name__ == "__main__":
 			screen.set_alpha(255-fade)
 			screen.fill(cc)
 
-			size_text = font.size(trends[ims])
-			ren = font.render(trends[ims], 1, c_w)
-			screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h/2 - size_text[1]/2))
-
+			#str_nn = splitlines(trends[ims])
+			#size_text = font.size(str_nn)
+			#ren = font.render(str_nn, 1, c_w)
+			#screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h/2 - size_text[1]/2))
+			line_tt = trends[ims]
+			n_tt, strs_tt = splitlines(line_tt)
+			for n,str_tt in enumerate(strs_tt):
+				size_text = font.size(str_tt)
+				ren = font.render(str_tt, 1, c_w)
+				screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h/2 - (1-n)*size_text[1]))
 			ss.set_alpha(fade)
 			ss.fill((255, 255, 255))
 			screen.blit(ss, (0, 0))
@@ -321,6 +372,7 @@ if __name__ == "__main__":
 			t0 = time.time()
 
 		# break?
+		pygame.event.get()
 		key = cv2.waitKey(1) & 0xFF
 		if key == ord('n'):
 			ff = gray_img
