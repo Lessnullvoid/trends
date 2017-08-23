@@ -98,7 +98,7 @@ if __name__ == "__main__":
 	args = vars(ap.parse_args())
 
 	# osc
-	recv_addr = "127.0.0.1", 10001
+	recv_addr = "127.0.0.1", 10001 #cambiar direccion con datos de la raspberry corriendo trends_A
 	s = OSC.OSCServer(recv_addr)
 	s.addMsgHandler('/cell', cell_callback)
 	st = threading.Thread(target=s.serve_forever)

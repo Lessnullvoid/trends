@@ -96,7 +96,7 @@ if __name__ == "__main__":
 	args = vars(ap.parse_args())
 
 	# osc
-	send_addr = "127.0.0.1", 10001
+	send_addr = "127.0.0.1", 10001 #cambiar direccion con datos de la replica
 	cOsc = OSC.OSCClient()
 	cOsc.connect(send_addr)
 	print "[t]: OSC : ok"

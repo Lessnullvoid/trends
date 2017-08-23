@@ -1,8 +1,8 @@
 
 
 **Librerias y dependencies**
-Estos son los programas que se tienen que instalar en la raspberry para poder hacer funcionar el software. 
-Por el momento el clone con el que estamos trabajando ya tiene todo instalado pero en caso de que fuera necesario hacer una instalación desde cero esto es lo que se necesita: 
+Estos son los programas que se tienen que instalar en la raspberry para poder hacer funcionar el software.
+Por el momento el clone con el que estamos trabajando ya tiene todo instalado pero en caso de que fuera necesario hacer una instalación desde cero esto es lo que se necesita:
 
 >sudo apt-get install python-pandas
 
@@ -41,7 +41,7 @@ http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspbe
 
 _(en la lista va aparecer algo como: /dev/disk2 o /dev/disk1)_
 
-3. hacer una copia de la imagen 
+3. hacer una copia de la imagen
 > sudo dd if=/dev/disk2 of=~/Desktop/raspberrypi.dmg
 
 _(recuerda revisar bien el número de disco que arroje el primer comando para hacer la copia correcta)_
@@ -58,7 +58,7 @@ ______________________________________________________________________________
 2. Ejecturar el comando para buscar el sd card
 > diskutil list
 
-3. Borrar y formatear 
+3. Borrar y formatear
 > sudo diskutil eraseDisk FAT32 RASPBIAN MBRFormat /dev/disk2
 
 **Cargar clon a una tarjeta limpia**
@@ -76,7 +76,7 @@ ______________________________________________________________________________
  **Cambiar el nombre de la raspberry**
 
 1. Acceder a la raspberry por la terminal
-> ssh pi@trends1.local 
+> ssh pi@trends1.local
 
 > pass: 1234
 
@@ -85,28 +85,38 @@ ______________________________________________________________________________
  ______________________________________________________________________________
 
 
-**Ejecutar Script para trends desde terminal mac**
-1. Acceder a la raspberry por la terminal
-> ssh pi@trends1.local 
+**Ejecutar Script trends_A desde terminal raspberry**
 
-> pass: 1234
+1. Abrir terminal
 
-2. navegar hasta la carpeta
+2. Iniciar teclado virtual
+
+> matchbox-keyboard
+
+3. navegar hasta la carpeta
+
 >cd trends
 
-3. iniciar la pantalla externa
-> export DIPLAY=:10.0
+4. Buscar ip de la raspberry
 
-4. -ejecutar el script 
->sudo python trends.py
+> sudo ip addr show
 
-5. detener el script
->ctrl + c 
+5. Modificar direccion ip en cada documento
+
+6. -ejecutar el script trends_B  
+>sudo python trends_B.py
+
+6. -ejecutar el script trends_A  
+>sudo python trends_A.py
+
+5. detener el scripts
+>ctrl + c
+
 
 **Ejecutar Script para replica desde terminal mac**
 
 1. Acceder a la raspberry por la terminal
-> ssh pi@trends1.local 
+> ssh pi@trends1.local
 
 > pass: 1234
 
@@ -116,25 +126,25 @@ ______________________________________________________________________________
 3. iniciar la pantalla externa
 > export DIPLAY=:10.0
 
-4. ejecutar el script 
+4. ejecutar el script
 >sudo python trensreplica.py
 
 5. detener el script
->ctrl + c 
+>ctrl + c
 
  ______________________________________________________________________________
 **Actualizar el código desde el repositorio**
 
 1. Acceder a la raspberry por la terminal
-> ssh pi@trends1.local 
+> ssh pi@trends1.local
 
 > pass: 1234
 
 2. Navegar hasta la carpeta
 >cd trends
 
-3. Actualizar el código con el siguiente comando 
-> git pull origin 
+3. Actualizar el código con el siguiente comando
+> git pull origin
 
  ______________________________________________________________________________
 **Apagar - reboot**
@@ -142,3 +152,13 @@ ______________________________________________________________________________
 > sudo shutdown -h now
 
 > sudo reboot -h now
+
+______________________________________________________________________________
+**Mostrar IP**
+
+> sudo ip addr show
+
+______________________________________________________________________________
+**Iniciar Teclado virtual**
+
+> matchbox-keyboard
