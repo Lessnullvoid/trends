@@ -193,13 +193,13 @@ if __name__ == "__main__":
 	print "[t]: display : 0FF"
 
 	# get images
-	imgs = []
+	img = []
 	for img_name in img_list:
 		imgs.append( pygame.image.load(img_name) )
 	print "[t]: img_list :"+str(len(img_list))
 
 	# get sounds
-	snds = []
+	snd = []
 	for snd_name in snd_list:
 		snds.append( pygame.mixer.Sound(snd_name) )
 	print "[t]: snd_list :"+str(len(snd_list))
