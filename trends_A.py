@@ -58,7 +58,7 @@ def print_info(cs):
 		print ''
 
 def send_actual(cell_no, trend_str, cOsc):
-	"""form and send osc messahe"""
+	"""form and send osc message"""
 	route = "/cell"
 	d = str(trend_str)
 	msg = OSC.OSCMessage()
@@ -93,7 +93,7 @@ def byreg(alltren, reg):
 
 
 
-colors = [(60, 186, 84), (244, 194, 13), (219, 50, 54), (72, 133, 237)]
+colors = [(40, 158, 0), (40, 158, 0), (40, 158, 0), (40, 158, 0)]
 ims = 0;
 cc = colors[0]
 
@@ -123,8 +123,8 @@ if __name__ == "__main__":
 
 	# trends
 	region = args["region"]
-	google_username = "XXXXX"
-	google_password = "XXXXX"
+	google_username = "minimaltecno78b@gmail.com"
+	google_password = "terremoto88"
 	path = ""
 	pytrend = TrendReq(google_username, google_password, hl='es-MX', geo='MX', custom_useragent="RenzoTrend Script")
 	# parse
@@ -176,7 +176,7 @@ if __name__ == "__main__":
 	s = pygame.Surface((disp_w, 110))
 	ss = pygame.Surface((disp_w, disp_h))
 
-	font = pygame.font.Font("Roboto-Regular.ttf", 90)
+	font = pygame.font.Font("arial.ttf", 90)
 	text = '[0FF]'
 	size = font.size(text)
 	c_w = 250, 240, 230
