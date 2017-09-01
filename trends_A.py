@@ -1,4 +1,4 @@
-#! /usr/bin/python 
+#! /usr/bin/python
 # -*-coding: UTF-8 -*-
 
 """
@@ -14,13 +14,13 @@ trends_A.py
 	.alternatively fades from white
 	.to color + centered trend text
 
-[CHI]: 3 Raspberry Pi con Chile de tendencia. 
-[IND]: 1 Raspberry Pi con Indonesia de tendencia. 
-[JPN]: 1 Raspberry Pi con Japón de tendencia. 
-[RUS]: 1 Raspberry Pi con Rusia de tendencia. 
-[USA]: 1 Raspberry Pi con EEUU de tendencia. 
-[ICE]: 1 Raspberry Pi con Islandia de tendencia (si Islandia no estan en Trends usar Nueva Zelanda). 
-[MEX]: 1 Raspberry Pi con México de tendencia.
+[CHI]: 0 Raspberry Pi con Chile de tendencia.
+[IND]: 1 Raspberry Pi con Indonesia de tendencia.
+[JPN]: 2 Raspberry Pi con Japón de tendencia.
+[RUS]: 3 Raspberry Pi con Rusia de tendencia.
+[USA]: 4 Raspberry Pi con EEUU de tendencia.
+[ICE]: 5 Raspberry Pi con Islandia de tendencia (si Islandia no estan en Trends usar Nueva Zelanda).
+[MEX]: 6 Raspberry Pi con México de tendencia.
 
 """
 
@@ -147,7 +147,7 @@ if __name__ == "__main__":
 	# resources directories
 	img_list = glob(args['img_dir'] + "*.*")
 	snd_list = glob(args['snd_dir'] + "*.*")
-	
+
 	# monitor/video source
 	mon_w = 320
 	mon_h = 240
@@ -230,7 +230,7 @@ if __name__ == "__main__":
 		#th, thresh_img = cv2.threshold(frame_delta, 25, 255, cv2.THRESH_BINARY)
 		thresh_img = cv2.dilate(frame_delta, None, iterations=2)
 		# contours
-		a,contours, hie = cv2.findContours(thresh_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+		contours, hie = cv2.findContours(thresh_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 		big_cnts = [co for co in contours if cv2.contourArea(co) > args['min_area']]
 		big_cnts = sorted(big_cnts, key = cv2.contourArea, reverse = True)
 		# init cells
@@ -249,7 +249,7 @@ if __name__ == "__main__":
 			# rectangles
 			cv2.rectangle(frame_delta, (cx-10, cy-10), (cx+20, cy+20), (255,255,255))
 		# draw monitor
-		#cv2.imshow("[trends]: monitor", frame_delta)		#comment this line to hide monitor window		
+		#cv2.imshow("[trends]: monitor", frame_delta)		#comment this line to hide monitor window
 		print_info(cells)
 		# update state
 		summ = 0;
@@ -263,7 +263,7 @@ if __name__ == "__main__":
 				cells[i]['past'] += cells[i]['count']
 				cells[i]['count'] = 0
 				# if count>10 fade
-				if cells[i]['past'] > 10:  
+				if cells[i]['past'] > 10:
 					if cells[i]['state'] == 0:
 						cells[i]['state'] = 1
 						# seleccionar evento
@@ -272,7 +272,7 @@ if __name__ == "__main__":
 						nn_tt = randint(0, len(trends)-1)
 						nn_ss = randint(0, len(snd_list)-1)
 						line_tt = trends[nn_tt]
-						n_tt, strs_tt = splitlines(line_tt) 
+						n_tt, strs_tt = splitlines(line_tt)
 						fade = 0
 						snds[nn_ss].play()
 						# send OSC
@@ -361,7 +361,7 @@ if __name__ == "__main__":
 			#ren = font.render(str_nn, 1, c_w)
 			#screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h/2 - size_text[1]/2))
 			line_tt = trends[ims]
-			n_tt, strs_tt = splitlines(line_tt) 
+			n_tt, strs_tt = splitlines(line_tt)
 			for n,str_tt in enumerate(strs_tt):
 				size_text = font.size(str_tt)
 				ren = font.render(str_tt, 1, c_w)
@@ -370,7 +370,7 @@ if __name__ == "__main__":
 			ss.fill((255, 255, 255))
 			screen.blit(ss, (0, 0))
 			pygame.display.update()
-		
+
 		# update cada hora
 		if time.time() - t0 > 3620:
 			"""
@@ -390,7 +390,7 @@ if __name__ == "__main__":
 				print "[t]: trends : ok"
 			except:
 				print "[x]: trends : could not update trends"
-			
+
 			t0 = time.time()
 
 		# break?
