@@ -201,6 +201,11 @@ exit 0
 (sleep 180; python /mnt/w/SK/python/trends/trends_A.py -r "127.0.0.1" -p "10001") &
 exit 0
 
+_____________________________________________
+**Cambiar modem wifi**
+
+> sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+
 ____________________________________________
 **Obtener la dirección IP de la rapsberry**
 
