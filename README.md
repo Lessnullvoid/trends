@@ -200,3 +200,8 @@ exit 0
 # (Ejemplo para  trends_B, cambiar ip/port):
 (sleep 180; python /mnt/w/SK/python/trends/trends_A.py -r "127.0.0.1" -p "10001") &
 exit 0
+
+____________________________________________
+**Obtener la dirección IP de la rapsberry**
+
+> hostname -I
