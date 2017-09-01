@@ -168,14 +168,35 @@ ________________________________________________________________________________
 
 - trends_A acepta los argumentos
 
-"-i", "--img-dir",                default="./img/",            help="image dir path"
-"-s", "--snd-dir",                default="./snd/",            help="sound dir path"
-"-r", "--receiver-ip",            default="127.0.0.1",        help="receiver ip address"
-"-p", "--receiver-port",        default="10001",            help="receiver osc port"
-"-g", "--region",                default="CHI",                help="region"
+> "-i", "--img-dir",                default="./img/",            help="image dir path"
+
+> "-s", "--snd-dir",                default="./snd/",            help="sound dir path"
+
+> "-r", "--receiver-ip",            default="127.0.0.1",        help="receiver ip address"
+
+> "-p", "--receiver-port",        default="10001",            help="receiver osc port"
+
+> "-g", "--region",                default="CHI",                help="region"
 
 los valores para región son CHI, IND, JPN, RUS, USA, ICE, MEX.
 
 - trends_B acepta los argumentos
-"-r", "--local-ip",            default="127.0.0.1",        help="local ip address"
-"-p", "--local-port",        default="10001",            help="local osc port"
+
+> "-r", "--local-ip",            default="127.0.0.1",        help="local ip address"
+
+> "-p", "--local-port",        default="10001",            help="local osc port"
+
+________________________________________________________________________________
+**Argumentos por script autorun**
+
+# Editar el archivo /etc/rc.local con:
+$ nano /etc/rc.local
+
+# Añadir al final del archivo, antes de "exit 0" una línea con el siguiente comando:
+# (Ejemplo para  trends_A, región México, cambiar path, directorios e ip/port):
+(sleep 180; python /mnt/w/SK/python/trends/trends_A.py -i "./imgs" -s "./snd" -r "127.0.0.1" -p "10001" -g "MEX") &
+exit 0
+
+# (Ejemplo para  trends_B, cambiar ip/port):
+(sleep 180; python /mnt/w/SK/python/trends/trends_A.py -r "127.0.0.1" -p "10001") &
+exit 0
