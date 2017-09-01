@@ -22,6 +22,10 @@ trends_A.py
 [ICE]: 5 Raspberry Pi con Islandia de tendencia (si Islandia no estan en Trends usar Nueva Zelanda).
 [MEX]: 6 Raspberry Pi con México de tendencia.
 
+execute with arguments:
+
+sudo python trends_A.py -i "./imgs" -s "./snd" -r "127.0.0.1" -p "10001" -g "MEX"
+
 """
 
 # packages
@@ -93,7 +97,7 @@ def byreg(alltren, reg):
 
 
 
-colors = [(40, 158, 0), (40, 158, 0), (40, 158, 0), (40, 158, 0)]
+colors = [(40, 158, 0), (40, 158, 4), (40, 158, 8), (40, 158, 20)]
 ims = 0;
 cc = colors[0]
 
