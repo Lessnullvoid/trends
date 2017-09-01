@@ -162,3 +162,20 @@ ______________________________________________________________________________
 **Iniciar Teclado virtual**
 
 > matchbox-keyboard
+
+________________________________________________________________________________
+**Argumentos por programa**
+
+- trends_A acepta los argumentos
+
+"-i", "--img-dir",                default="./img/",            help="image dir path"
+"-s", "--snd-dir",                default="./snd/",            help="sound dir path"
+"-r", "--receiver-ip",            default="127.0.0.1",        help="receiver ip address"
+"-p", "--receiver-port",        default="10001",            help="receiver osc port"
+"-g", "--region",                default="CHI",                help="region"
+
+los valores para región son CHI, IND, JPN, RUS, USA, ICE, MEX.
+
+- trends_B acepta los argumentos
+"-r", "--local-ip",            default="127.0.0.1",        help="local ip address"
+"-p", "--local-port",        default="10001",            help="local osc port"
