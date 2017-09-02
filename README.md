@@ -93,7 +93,9 @@ ______________________________________________________________________________
 
  ______________________________________________________________________________
 
-**Ejecutar Script trends_A desde terminal**
+# Ejecutar Script desde terminal
+
+**trends_A.py**
 
 1. Abrir terminal
 
@@ -116,7 +118,7 @@ En este paso es importante modificar la dirección de ip con la dirección de la
 >ctrl + c
 
 
-**Ejecutar Script para replica desde terminal mac**
+**trends_B.py**
 
 1. Acceder a la raspberry por la terminal
 > ssh pi@trends1.local
