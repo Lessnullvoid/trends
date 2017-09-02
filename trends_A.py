@@ -24,7 +24,7 @@ trends_A.py
 
 execute with arguments:
 
-sudo python trends_A.py -i "./imgs" -s "./snd" -r "127.0.0.1" -p "10001" -g "MEX"
+sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "192.168.1.109" -p "10001" -g "MEX"
 
 """
 
@@ -301,19 +301,19 @@ if __name__ == "__main__":
 						#s.fill((0,0,0))
 						#screen.blit(s, (0, disp_h-100))
 						# draw
-						for n,str_tt in enumerate(strs_tt):
-							size_text = font.size(str_tt)
+						#for n,str_tt in enumerate(strs_tt):
+							#size_text = font.size(str_tt)
 							#surface
-							s.set_alpha(fade)
-							s.fill((0,0,0))
+							#s.set_alpha(fade)
+							#s.fill((0,0,0))
 							#text
-							ren = font.render(str_tt, 1, c_w)
-							distache = 0
-							if n_tt==3: distache = disp_h-(3-n)*size_text[1]
-							if n_tt==2: distache = disp_h-(2-n)*size_text[1]
-							if n_tt==1: distache = disp_h-(1-n)*size_text[1]
-							screen.blit(s, (0, distache))
-							screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
+							#ren = font.render(str_tt, 1, c_w)
+							#distache = 0
+							#if n_tt==3: distache = disp_h-(3-n)*size_text[1]
+							#if n_tt==2: distache = disp_h-(2-n)*size_text[1]
+							#if n_tt==1: distache = disp_h-(1-n)*size_text[1]
+							#screen.blit(s, (0, distache))
+							#screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
 
 					else:
@@ -326,19 +326,19 @@ if __name__ == "__main__":
 						#s.fill((0,0,0))
 						#screen.blit(s, (0, disp_h-100))
 						# draw
-						for n,str_tt in enumerate(strs_tt):
-							size_text = font.size(str_tt)
+						#for n,str_tt in enumerate(strs_tt):
+							#size_text = font.size(str_tt)
 							#surface
-							s.set_alpha(fade)
-							s.fill((0,0,0))
+							#s.set_alpha(fade)
+							#s.fill((0,0,0))
 							#text
-							ren = font.render(str_tt, 1, c_w)
-							distache = 0
-							if n_tt==3: distache = disp_h-(3-n)*size_text[1]
-							if n_tt==2: distache = disp_h-(2-n)*size_text[1]
-							if n_tt==1: distache = disp_h-(1-n)*size_text[1]
-							screen.blit(s, (0, distache))
-							screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
+							#ren = font.render(str_tt, 1, c_w)
+							#distache = 0
+							#if n_tt==3: distache = disp_h-(3-n)*size_text[1]
+							#if n_tt==2: distache = disp_h-(2-n)*size_text[1]
+							#if n_tt==1: distache = disp_h-(1-n)*size_text[1]
+							#screen.blit(s, (0, distache))
+							#screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
 					#time.sleep(10)
 				summ +=1;
