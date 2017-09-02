@@ -194,11 +194,11 @@ $ nano /etc/rc.local
 
 # Añadir al final del archivo, antes de "exit 0" una línea con el siguiente comando:
 # (Ejemplo para  trends_A, región México, cambiar path, directorios e ip/port):
-(sleep 180; python /mnt/w/SK/python/trends/trends_A.py -i "./imgs" -s "./snd" -r "127.0.0.1" -p "10001" -g "MEX") &
+(sleep 180; sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "127.0.0.1" -p "10001" -g "MEX") &
 exit 0
 
 # (Ejemplo para  trends_B, cambiar ip/port):
-(sleep 180; python /mnt/w/SK/python/trends/trends_A.py -r "127.0.0.1" -p "10001") &
+(sleep 180; python /home/pi/trends/trends_B.py -r "127.0.0.1" -p "10001") &
 exit 0
 
 _____________________________________________
