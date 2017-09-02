@@ -1,8 +1,12 @@
+#Descripción del sistema
+Utilizando una camara webcam se programo un sensor que puede identificar actividad en un reticula de 3X3
+De acuerdo a una logica de presencia dispara elementos audivisuales.
+Cuando no detecta presencia muestra la actividad del feed de googel trends segun regiones especificas. 
 
+#Configuración de librerias 
+La primera parte de este tutorial contiene una lista de las librearias instaladas para hacer funcionar el sistema. En el repositorio incluimos una imagen de raspberry con todas las dependencias instaladas, pero en caso de querer iniciar una instalación desde cero aquí se incluye la lista completa. 
 
 **Librerias y dependencies**
-Estos son los programas que se tienen que instalar en la raspberry para poder hacer funcionar el software.
-Por el momento el clone con el que estamos trabajando ya tiene todo instalado pero en caso de que fuera necesario hacer una instalación desde cero esto es lo que se necesita:
 
 >sudo apt-get install python-pandas
 
@@ -17,11 +21,14 @@ Por el momento el clone con el que estamos trabajando ya tiene todo instalado pe
 >sudo pip install pytrends
 
 **install opencv2**
+para hacer la instalación de computer vision seguir este tutorial completo:
 http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspberry-pi-2-and-b/
 
  ______________________________________________________________________________
 
-**NUEVAS LIBRERIAS PARA INSTALAR ANTES DE USAR**
+
+**LIBRERIAS PARA INSTALAR ANTES DE USAR**
+A pesar de ya estar instaladas se recomienda hacer una segunda instalación de estas librerias
 
 1 - instalar esta versión de pytrends
 
@@ -32,6 +39,8 @@ http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspbe
 > pip install python-osc
 
  ______________________________________________________________________________
+
+#Preparación de una imagen de raspberry pi  
 
 **Clonar imagen del raspberry al escritorio de la mac**
 1. Incertar la SD Card con el sistema operativo funcional en la mac
@@ -84,30 +93,24 @@ ______________________________________________________________________________
 
  ______________________________________________________________________________
 
-
-**Ejecutar Script trends_A desde terminal raspberry**
+**Ejecutar Script trends_A desde terminal**
 
 1. Abrir terminal
 
-2. Iniciar teclado virtual
-
-> matchbox-keyboard
-
-3. navegar hasta la carpeta
+2. navegar hasta la carpeta
 
 >cd trends
 
-4. Buscar ip de la raspberry
+3. Buscar ip de la raspberry
 
-> sudo ip addr show
+> hostname -I
 
-5. Modificar direccion ip en cada documento
+4. Modificar direccion ip en el comando
 
-6. -ejecutar el script trends_B  
->sudo python trends_B.py
+5. -ejecutar el script trends_A 
+>sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "127.0.0.1" -p "10001" -g "MEX"
 
-6. -ejecutar el script trends_A  
->sudo python trends_A.py
+En este paso es importante modificar la dirección de ip con la dirección de la raspberry replica.
 
 5. detener el scripts
 >ctrl + c
@@ -123,13 +126,10 @@ ______________________________________________________________________________
 2. navegar hasta la carpeta
 >cd trends
 
-3. iniciar la pantalla externa
-> export DIPLAY=:10.0
+3. ejecutar el script
+>python /home/pi/trends/trends_B.py -r "127.0.0.1" -p "10001"
 
-4. ejecutar el script
->sudo python trensreplica.py
-
-5. detener el script
+4. detener el script
 >ctrl + c
 
  ______________________________________________________________________________
@@ -189,12 +189,11 @@ los valores para región son CHI, IND, JPN, RUS, USA, ICE, MEX.
 ________________________________________________________________________________
 **Argumentos por script autorun**
 
-# Editar el archivo /etc/rc.local con:
-$ nano /etc/rc.local
+- Editar el archivo /etc/rc.local con:
+> $ nano /etc/rc.local
 
-# Añadir al final del archivo, antes de "exit 0" una línea con el siguiente comando:
-# (Ejemplo para  trends_A, región México, cambiar path, directorios e ip/port):
-(sleep 180; sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "127.0.0.1" -p "10001" -g "MEX") &
+- Añadir al final del archivo, antes de "exit 0" una línea con el siguiente comando:
+> (sleep 180; sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "127.0.0.1" -p "10001" -g "MEX") &
 exit 0
 
 # (Ejemplo para  trends_B, cambiar ip/port):
