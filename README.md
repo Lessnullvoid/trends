@@ -1,9 +1,9 @@
-#Descripción del sistema
+# Descripción del sistema
 Utilizando una camara webcam se programo un sensor que puede identificar actividad en un reticula de 3X3
 De acuerdo a una logica de presencia dispara elementos audivisuales.
 Cuando no detecta presencia muestra la actividad del feed de googel trends segun regiones especificas. 
 
-#Configuración de librerias 
+# Configuración de librerias 
 La primera parte de este tutorial contiene una lista de las librearias instaladas para hacer funcionar el sistema. En el repositorio incluimos una imagen de raspberry con todas las dependencias instaladas, pero en caso de querer iniciar una instalación desde cero aquí se incluye la lista completa. 
 
 **Librerias y dependencies**
@@ -40,7 +40,7 @@ A pesar de ya estar instaladas se recomienda hacer una segunda instalación de e
 
  ______________________________________________________________________________
 
-#Preparación de una imagen de raspberry pi  
+# Preparación de una imagen de raspberry pi  
 
 **Clonar imagen del raspberry al escritorio de la mac**
 1. Incertar la SD Card con el sistema operativo funcional en la mac
@@ -196,7 +196,7 @@ ________________________________________________________________________________
 > (sleep 180; sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "127.0.0.1" -p "10001" -g "MEX") &
 exit 0
 
-# (Ejemplo para  trends_B, cambiar ip/port):
+- Ejemplo para  trends_B, cambiar ip/port):
 (sleep 180; python /home/pi/trends/trends_B.py -r "127.0.0.1" -p "10001") &
 exit 0
 
