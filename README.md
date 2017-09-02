@@ -28,6 +28,7 @@ http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspbe
 
 
 **LIBRERIAS PARA INSTALAR ANTES DE USAR**
+
 A pesar de ya estar instaladas se recomienda hacer una segunda instalación de estas librerias
 
 1 - instalar esta versión de pytrends
