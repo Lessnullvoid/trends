@@ -91,8 +91,47 @@ ______________________________________________________________________________
 > pass: 1234
 
 2. sudo raspi-config
+ 
+________________________________________________________________________________
+# Argumentos que aceptan los scripts
 
- ______________________________________________________________________________
+> los valores para región son CHI, IND, JPN, RUS, USA, ICE, MEX.
+
+
+- trends_A acepta los argumentos
+
+> "-i", "--img-dir",                default="./img/",            help="image dir path"
+
+> "-s", "--snd-dir",                default="./snd/",            help="sound dir path"
+
+> "-r", "--receiver-ip",            default="127.0.0.1",        help="receiver ip address"
+
+> "-p", "--receiver-port",        default="10001",            help="receiver osc port"
+
+> "-g", "--region",                default="CHI",                help="region"
+
+
+- trends_B acepta los argumentos
+
+> "-r", "--local-ip",            default="127.0.0.1",        help="local ip address"
+
+> "-p", "--local-port",        default="10001",            help="local osc port"
+
+________________________________________________________________________________
+**Argumentos por script autorun**
+
+- Editar el archivo /etc/rc.local con:
+> $ nano /etc/rc.local
+
+- Añadir al final del archivo, antes de "exit 0" una línea con el siguiente comando:
+> (sleep 180; sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "127.0.0.1" -p "10001" -g "MEX") &
+exit 0
+
+- Ejemplo para  trends_B, cambiar ip/port):
+(sleep 180; python /home/pi/trends/trends_B.py -r "127.0.0.1" -p "10001") &
+exit 0
+
+_____________________________________________
 
 # Ejecutar Script desde terminal
 
@@ -166,44 +205,7 @@ ______________________________________________________________________________
 
 > matchbox-keyboard
 
-________________________________________________________________________________
-**Argumentos por programa**
-
-- trends_A acepta los argumentos
-
-> "-i", "--img-dir",                default="./img/",            help="image dir path"
-
-> "-s", "--snd-dir",                default="./snd/",            help="sound dir path"
-
-> "-r", "--receiver-ip",            default="127.0.0.1",        help="receiver ip address"
-
-> "-p", "--receiver-port",        default="10001",            help="receiver osc port"
-
-> "-g", "--region",                default="CHI",                help="region"
-
-los valores para región son CHI, IND, JPN, RUS, USA, ICE, MEX.
-
-- trends_B acepta los argumentos
-
-> "-r", "--local-ip",            default="127.0.0.1",        help="local ip address"
-
-> "-p", "--local-port",        default="10001",            help="local osc port"
-
-________________________________________________________________________________
-**Argumentos por script autorun**
-
-- Editar el archivo /etc/rc.local con:
-> $ nano /etc/rc.local
-
-- Añadir al final del archivo, antes de "exit 0" una línea con el siguiente comando:
-> (sleep 180; sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "127.0.0.1" -p "10001" -g "MEX") &
-exit 0
-
-- Ejemplo para  trends_B, cambiar ip/port):
-(sleep 180; python /home/pi/trends/trends_B.py -r "127.0.0.1" -p "10001") &
-exit 0
-
-_____________________________________________
+_________________________________________________________________________________
 **Cambiar modem wifi**
 
 > sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
