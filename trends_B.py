@@ -161,7 +161,7 @@ if __name__ == "__main__":
 	# .the loop
 	while True:
 
-		# DETECT CELLS 
+		# DETECT CELLS
 
 		for i in range (9):
 			cells[i]['count']=0
@@ -188,7 +188,6 @@ if __name__ == "__main__":
 		# ----- ----- ------ ----- ----- NO DETECTION
 		#cv2.imshow("[trends]: monitor", None)
 		#go white
-		nn_ss = randint(0, len(snd_list)-1)
 		clock.tick(60)
 		if t<255: fade = 255-t
 		elif t>512: fade = t-512
