@@ -134,7 +134,7 @@ if __name__ == "__main__":
 	s = pygame.Surface((disp_w, 110))
 	ss = pygame.Surface((disp_w, disp_h))
 
-	font = pygame.font.Font("Roboto-Regular.ttf", 90)
+	font = pygame.font.Font("arial.ttf", 90)
 	text = '[0FF]'
 	size = font.size(text)
 	c_w = 250, 240, 230
@@ -152,8 +152,39 @@ if __name__ == "__main__":
 		snds.append( pygame.mixer.Sound(snd_name) )
 	print "[t]: snd_list :"+str(len(snd_list))
 
+	# model
+	cells = []
+	for i in range(9):
+		cell = {"count":0, "past":0, "state":0}
+		cells.append(cell);
+
 	# .the loop
 	while True:
+
+		# DETECT CELLS 
+
+		for i in range (9):
+			cells[i]['count']=0
+
+		for i in range(9):
+			if cells[i]['count'] == 0:
+				cells[i]['past'] = 0
+				cells[i]['state']= 0
+
+		    else:
+				cells[i]['past'] += cells[i]['count']
+				cells[i]['count'] = 0
+
+				if cells[i]['past'] > 10:
+					if cells[i]['state'] == 0:
+						cells[i]['state'] == 1;
+
+						#activar evento
+						nn_ss = randint(0, len(snd_list)-1)
+						snds[nn_ss].play()
+
+
+
 		# ----- ----- ------ ----- ----- NO DETECTION
 		#cv2.imshow("[trends]: monitor", None)
 		#go white
@@ -174,9 +205,7 @@ if __name__ == "__main__":
 
 		if (len(trends)>0):
 			line_tt = trends[ims]
-			nn_ss = randint(0, len(snd_list)-1)
 			n_tt, strs_tt = splitlines(line_tt)
-			snds[nn_ss].play()
 			for n,str_tt in enumerate(strs_tt):
 				size_text = font.size(str_tt)
 				ren = font.render(str_tt, 1, c_w)
