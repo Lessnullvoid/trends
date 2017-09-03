@@ -162,15 +162,15 @@ if __name__ == "__main__":
 	while True:
 
 		# DETECT CELLS
-
 		for i in range (9):
 			cells[i]['count']=0
 
 		for i in range(9):
+			# if not occupied turn off
 			if cells[i]['count'] == 0:
 				cells[i]['past'] = 0
 				cells[i]['state']= 0
-
+			# if occupied count
 		    else:
 				cells[i]['past'] += cells[i]['count']
 				cells[i]['count'] = 0
@@ -180,6 +180,7 @@ if __name__ == "__main__":
 						cells[i]['state'] == 1;
 
 						#activar evento
+						ant_ii = nn_ii
 						nn_ss = randint(0, len(snd_list)-1)
 						snds[nn_ss].play()
 
