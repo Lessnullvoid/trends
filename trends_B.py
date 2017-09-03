@@ -157,6 +157,7 @@ if __name__ == "__main__":
 		# ----- ----- ------ ----- ----- NO DETECTION
 		#cv2.imshow("[trends]: monitor", None)
 		#go white
+		nn_ss = randint(0, len(snd_list)-1)
 		clock.tick(60)
 		if t<255: fade = 255-t
 		elif t>512: fade = t-512
@@ -173,6 +174,7 @@ if __name__ == "__main__":
 
 		if (len(trends)>0):
 			line_tt = trends[ims]
+			nn_ss = randint(0, len(snd_list)-1)
 			n_tt, strs_tt = splitlines(line_tt)
 			for n,str_tt in enumerate(strs_tt):
 				size_text = font.size(str_tt)
@@ -191,6 +193,8 @@ if __name__ == "__main__":
 		ss.fill((255, 255, 255))
 		screen.blit(ss, (0, 0))
 		pygame.display.update()
+		snds[nn_ss].play()
+
 
 		# break?
 		pygame.event.get()
