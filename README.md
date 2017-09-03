@@ -150,7 +150,7 @@ _____________________________________________
 4. Modificar direccion ip en el comando
 
 5. -ejecutar el script trends_A 
->sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "127.0.0.1" -p "10001" -g "MEX"
+>sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "(poner ip)" -p "10001" -g "MEX"
 
 En este paso es importante modificar la dirección de ip con la dirección de la raspberry replica.
 
@@ -169,7 +169,7 @@ En este paso es importante modificar la dirección de ip con la dirección de la
 >cd trends
 
 3. ejecutar el script
->python /home/pi/trends/trends_B.py -r "127.0.0.1" -p "10001"
+> sudo python /home/pi/trends/trends_B.py -s "./snd/" -r "(poner ip)" -p "10001"
 
 4. detener el script
 >ctrl + c
