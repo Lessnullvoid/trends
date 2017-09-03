@@ -176,6 +176,7 @@ if __name__ == "__main__":
 			line_tt = trends[ims]
 			nn_ss = randint(0, len(snd_list)-1)
 			n_tt, strs_tt = splitlines(line_tt)
+			snds[nn_ss].play()
 			for n,str_tt in enumerate(strs_tt):
 				size_text = font.size(str_tt)
 				ren = font.render(str_tt, 1, c_w)
@@ -193,7 +194,7 @@ if __name__ == "__main__":
 		ss.fill((255, 255, 255))
 		screen.blit(ss, (0, 0))
 		pygame.display.update()
-		snds[nn_ss].play()
+
 
 
 		# break?
