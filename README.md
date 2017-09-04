@@ -167,7 +167,11 @@ _____________________________________________
 4. Modificar direccion ip en el comando
 
 5. -ejecutar el script trends_A
->sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "127.0.0.1" -p "10001" -g "MEX"
+>sudo python /home/pi/trends/trends_A.py -i "./img01/" -s "./snd01/" -r "127.0.0.1" -p "10001" -g "CHI"
+>sudo python /home/pi/trends/trends_A.py -i "./img02/" -s "./snd02/" -r "127.0.0.1" -p "10001" -g "CHI"
+>sudo python /home/pi/trends/trends_A.py -i "./img03/" -s "./snd03/" -r "127.0.0.1" -p "10001" -g "RUS"
+>sudo python /home/pi/trends/trends_A.py -i "./img04/" -s "./snd04/" -r "127.0.0.1" -p "10001" -g "IND"
+
 
 En este paso es importante modificar la dirección de ip con la dirección de la raspberry replica.
 
@@ -191,7 +195,7 @@ En este paso es importante modificar la dirección de ip con la dirección de la
 4. detener el script
 >ctrl + c
 
-** Contenido de las carpetas de medios**
+**Contenido de las carpetas de medios**
 
 img:
 img01 = Chile
