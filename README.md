@@ -121,7 +121,7 @@ ________________________________________________________________________________
 **Argumentos por script autorun**
 
 - Editar el archivo /etc/rc.local con:
-> $ nano /etc/rc.local
+>  sudo nano /etc/rc.local
 
 - Añadir al final del archivo, antes de "exit 0" una línea con el siguiente comando:
 > (sleep 180; sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "127.0.0.1" -p "10001" -g "MEX") &
@@ -130,6 +130,23 @@ exit 0
 - Ejemplo para  trends_B, cambiar ip/port):
 (sleep 180; python /home/pi/trends/trends_B.py -r "127.0.0.1" -p "10001") &
 exit 0
+
+- Guardar los cambios
+
+________________________________________________________________________________
+
+** Apagar la raspberry a una hora especifica**
+
+- Editar el archivo  /etc/crontab con:
+
+> sudo nano /etc/crontab
+
+- Agregar la siguiete linea al final del documento
+
+> 30 19 * * * root shutdown -h now
+
+- Guardar los cambios
+
 
 _____________________________________________
 
@@ -196,7 +213,7 @@ snd05 = Indonesia
 snd06 = Mexico
 snd07 = Japon
 snd08 = EEUU
-snd09 = Islandia 
+snd09 = Islandia
 
  ______________________________________________________________________________
 **Actualizar el código desde el repositorio**
