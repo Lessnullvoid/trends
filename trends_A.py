@@ -1,6 +1,7 @@
 #! /usr/bin/python
 # -*-coding: UTF-8 -*-
 
+
 """
 trends_A.py
 ----------
@@ -25,6 +26,31 @@ trends_A.py
 execute with arguments:
 
 sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "192.168.1.109" -p "10001" -g "MEX"
+
+orden de las caperpetas de audio y video
+
+img:
+img01 = Chile
+img02 = Chile
+img03 = Rusia
+img04 = Chile
+img05 = Indonesia
+img06 = Mexico
+img07 = Japon
+img08 = EEUU
+img09 = Islandia
+
+snd:
+snd01 = Chile
+snd02 = Chile
+snd03 = Rusia
+snd04 = Chile
+snd05 = Indonesia
+snd06 = Mexico
+snd07 = Japon
+snd08 = EEUU
+snd09 = Islandia
+
 
 """
 
@@ -273,6 +299,7 @@ if __name__ == "__main__":
 						cells[i]['state'] = 1
 						# seleccionar evento
 						ant_ii = nn_ii
+
 						nn_ii = randint(0, len(img_list)-1)
 						nn_tt = randint(0, len(trends)-1)
 						nn_ss = randint(0, len(snd_list)-1)

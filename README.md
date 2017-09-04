@@ -1,10 +1,10 @@
 # Descripción del sistema
 Utilizando una camara webcam se programo un sensor que puede identificar actividad en un reticula de 3X3
 De acuerdo a una logica de presencia dispara elementos audivisuales.
-Cuando no detecta presencia muestra la actividad del feed de googel trends segun regiones especificas. 
+Cuando no detecta presencia muestra la actividad del feed de googel trends segun regiones especificas.
 
-# Configuración de librerias 
-La primera parte de este tutorial contiene una lista de las librearias instaladas para hacer funcionar el sistema. En el repositorio incluimos una imagen de raspberry con todas las dependencias instaladas, pero en caso de querer iniciar una instalación desde cero aquí se incluye la lista completa. 
+# Configuración de librerias
+La primera parte de este tutorial contiene una lista de las librearias instaladas para hacer funcionar el sistema. En el repositorio incluimos una imagen de raspberry con todas las dependencias instaladas, pero en caso de querer iniciar una instalación desde cero aquí se incluye la lista completa.
 
 **Librerias y dependencies**
 
@@ -91,7 +91,7 @@ ______________________________________________________________________________
 > pass: 1234
 
 2. sudo raspi-config
- 
+
 ________________________________________________________________________________
 # Argumentos que aceptan los scripts
 
@@ -149,8 +149,8 @@ _____________________________________________
 
 4. Modificar direccion ip en el comando
 
-5. -ejecutar el script trends_A 
->sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "(poner ip)" -p "10001" -g "MEX"
+5. -ejecutar el script trends_A
+>sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "127.0.0.1" -p "10001" -g "MEX"
 
 En este paso es importante modificar la dirección de ip con la dirección de la raspberry replica.
 
@@ -169,10 +169,34 @@ En este paso es importante modificar la dirección de ip con la dirección de la
 >cd trends
 
 3. ejecutar el script
-> sudo python /home/pi/trends/trends_B.py -s "./snd/" -r "(poner ip)" -p "10001"
+>sudo python /home/pi/trends/trends_B.py -r "127.0.0.1" -p "10001"
 
 4. detener el script
 >ctrl + c
+
+** Contenido de las carpetas de medios**
+
+img:
+img01 = Chile
+img02 = Chile
+img03 = Rusia
+img04 = Chile
+img05 = Indonesia
+img06 = Mexico
+img07 = Japon
+img08 = EEUU
+img09 = Islandia
+
+snd:
+snd01 = Chile
+snd02 = Chile
+snd03 = Rusia
+snd04 = Chile
+snd05 = Indonesia
+snd06 = Mexico
+snd07 = Japon
+snd08 = EEUU
+snd09 = Islandia 
 
  ______________________________________________________________________________
 **Actualizar el código desde el repositorio**
