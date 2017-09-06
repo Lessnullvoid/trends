@@ -1,4 +1,4 @@
-#! /usr/bin/python 
+#! /usr/bin/python
 # -*-coding: UTF-8 -*-
 
 """
@@ -14,13 +14,13 @@ trends_A.py
 	.alternatively fades from white
 	.to color + centered trend text
 
-[CHI]: 3 Raspberry Pi con Chile de tendencia. 
-[IND]: 1 Raspberry Pi con Indonesia de tendencia. 
-[JPN]: 1 Raspberry Pi con Japón de tendencia. 
-[RUS]: 1 Raspberry Pi con Rusia de tendencia. 
-[USA]: 1 Raspberry Pi con EEUU de tendencia. 
-[ICE]: 1 Raspberry Pi con Islandia de tendencia (si Islandia no estan en Trends usar Nueva Zelanda). 
-[MEX]: 1 Raspberry Pi con México de tendencia.
+[CHI]: 0 Raspberry Pi con Chile de tendencia.
+[IND]: 1 Raspberry Pi con Indonesia de tendencia.
+[JPN]: 2 Raspberry Pi con Japón de tendencia.
+[RUS]: 3 Raspberry Pi con Rusia de tendencia.
+[USA]: 4 Raspberry Pi con EEUU de tendencia.
+[ICE]: 5 Raspberry Pi con Islandia de tendencia (si Islandia no estan en Trends usar Nueva Zelanda).
+[MEX]: 6 Raspberry Pi con México de tendencia.
 
 """
 
@@ -93,7 +93,7 @@ def byreg(alltren, reg):
 
 
 
-colors = [(60, 186, 84), (244, 194, 13), (219, 50, 54), (72, 133, 237)]
+colors = [(40, 158, 0), (40, 158, 0), (40, 158, 0), (40, 158, 0)]
 ims = 0;
 cc = colors[0]
 
@@ -123,8 +123,8 @@ if __name__ == "__main__":
 
 	# trends
 	region = args["region"]
-	google_username = "XXXXX"
-	google_password = "XXXXX"
+	google_username = "minimaltecno78b@gmail.com"
+	google_password = "terremoto88"
 	path = ""
 	pytrend = TrendReq(google_username, google_password, hl='es-MX', geo='MX', custom_useragent="RenzoTrend Script")
 	# parse
@@ -147,7 +147,7 @@ if __name__ == "__main__":
 	# resources directories
 	img_list = glob(args['img_dir'] + "*.*")
 	snd_list = glob(args['snd_dir'] + "*.*")
-	
+
 	# monitor/video source
 	mon_w = 320
 	mon_h = 240
@@ -176,7 +176,7 @@ if __name__ == "__main__":
 	s = pygame.Surface((disp_w, 110))
 	ss = pygame.Surface((disp_w, disp_h))
 
-	font = pygame.font.Font("Roboto-Regular.ttf", 90)
+	font = pygame.font.Font("arial.ttf", 90)
 	text = '[0FF]'
 	size = font.size(text)
 	c_w = 250, 240, 230
@@ -249,7 +249,7 @@ if __name__ == "__main__":
 			# rectangles
 			cv2.rectangle(frame_delta, (cx-10, cy-10), (cx+20, cy+20), (255,255,255))
 		# draw monitor
-		#cv2.imshow("[trends]: monitor", frame_delta)		#comment this line to hide monitor window		
+		#cv2.imshow("[trends]: monitor", frame_delta)		#comment this line to hide monitor window
 		print_info(cells)
 		# update state
 		summ = 0;
@@ -263,7 +263,7 @@ if __name__ == "__main__":
 				cells[i]['past'] += cells[i]['count']
 				cells[i]['count'] = 0
 				# if count>10 fade
-				if (cells[i]['past'] > 10):  
+				if (cells[i]['past'] > 10):
 					if cells[i]['state'] == 0:
 						cells[i]['state'] = 1
 						# seleccionar evento
@@ -272,7 +272,7 @@ if __name__ == "__main__":
 						nn_tt = randint(0, len(trends)-1)
 						nn_ss = randint(0, len(snd_list)-1)
 						line_tt = trends[nn_tt]
-						n_tt, strs_tt = splitlines(line_tt) 
+						n_tt, strs_tt = splitlines(line_tt)
 						fade = 0
 						snds[nn_ss].play()
 						# send OSC
@@ -365,7 +365,7 @@ if __name__ == "__main__":
 			#ren = font.render(str_nn, 1, c_w)
 			#screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h/2 - size_text[1]/2))
 			line_tt = trends[ims]
-			n_tt, strs_tt = splitlines(line_tt) 
+			n_tt, strs_tt = splitlines(line_tt)
 			for n,str_tt in enumerate(strs_tt):
 				size_text = font.size(str_tt)
 				ren = font.render(str_tt, 1, c_w)
@@ -374,7 +374,7 @@ if __name__ == "__main__":
 			ss.fill((255, 255, 255))
 			screen.blit(ss, (0, 0))
 			pygame.display.update()
-		
+
 		# update cada hora
 		if time.time() - t0 > 3620:
 			"""
@@ -394,7 +394,7 @@ if __name__ == "__main__":
 				print "[t]: trends : ok"
 			except:
 				print "[x]: trends : could not update trends"
-			
+
 			t0 = time.time()
 
 		# break?

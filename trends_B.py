@@ -1,4 +1,4 @@
-#! /usr/bin/python 
+#! /usr/bin/python
 # -*-coding: UTF-8 -*-
 
 """
@@ -100,7 +100,7 @@ if __name__ == "__main__":
 	ap.add_argument("-s", "--snd-dir", 			  default="./snd/", help="sound dir path")
 	ap.add_argument("-r", "--local-ip",			default="127.0.0.1",		help="local ip address")
 	ap.add_argument("-p", "--local-port",		default="10001",			help="local osc port")
-	
+
 	args = vars(ap.parse_args())
 
 	# osc
@@ -118,7 +118,7 @@ if __name__ == "__main__":
 
 	# resources directories
 	snd_list = glob(args['snd_dir'] + "*.*")
-	
+
 	# display/pygame init
 	disp_w = 1280
 	disp_h = 720
@@ -133,7 +133,7 @@ if __name__ == "__main__":
 	s = pygame.Surface((disp_w, 110))
 	ss = pygame.Surface((disp_w, disp_h))
 
-	font = pygame.font.Font("Roboto-Regular.ttf", 90)
+	font = pygame.font.Font("arial.ttf", 90)
 	text = '[0FF]'
 	size = font.size(text)
 	c_w = 250, 240, 230
@@ -172,7 +172,7 @@ if __name__ == "__main__":
 
 		if (len(trends)>0):
 			line_tt = trends[ims]
-			n_tt, strs_tt = splitlines(line_tt) 
+			n_tt, strs_tt = splitlines(line_tt)
 			for n,str_tt in enumerate(strs_tt):
 				size_text = font.size(str_tt)
 				ren = font.render(str_tt, 1, c_w)
@@ -181,11 +181,11 @@ if __name__ == "__main__":
 			size_text = font.size("[0FF]")
 			ren = font.render("[0FF]", 1, c_w)
 			screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h/2 - size_text[1]/2))
-		
-		if (len(trends)>10): 
+
+		if (len(trends)>10):
 			trends = trends[-10:]
 
-		
+
 		ss.set_alpha(fade)
 		ss.fill((255, 255, 255))
 		screen.blit(ss, (0, 0))
