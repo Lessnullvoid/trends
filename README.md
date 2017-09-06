@@ -174,7 +174,19 @@ _____________________________________________
 
 >sudo python /home/pi/trends/trends_A.py -i "./img03/" -s "./snd03/" -r "127.0.0.1" -p "10001" -g "RUS"
 
->sudo python /home/pi/trends/trends_A.py -i "./img04/" -s "./snd04/" -r "127.0.0.1" -p "10001" -g "IND"
+>sudo python /home/pi/trends/trends_A.py -i "./img04/" -s "./snd04/" -r "127.0.0.1" -p "10001" -g "CHI"
+
+>sudo python /home/pi/trends/trends_A.py -i "./img05/" -s "./snd05/" -r "127.0.0.1" -p "10001" -g "IND"
+
+>sudo python /home/pi/trends/trends_A.py -i "./img06/" -s "./snd06/" -r "127.0.0.1" -p "10001" -g "MEX"
+
+>sudo python /home/pi/trends/trends_A.py -i "./img07/" -s "./snd07/" -r "127.0.0.1" -p "10001" -g "JPN"
+
+>sudo python /home/pi/trends/trends_A.py -i "./img08/" -s "./snd08/" -r "127.0.0.1" -p "10001" -g "USA"
+
+>sudo python /home/pi/trends/trends_A.py -i "./img09/" -s "./snd09/" -r "127.0.0.1" -p "10001" -g "ICE"
+
+
 
 
 En este paso es importante modificar la dirección de ip con la dirección de la raspberry replica.
@@ -202,25 +214,43 @@ En este paso es importante modificar la dirección de ip con la dirección de la
 **Contenido de las carpetas de medios**
 
 img:
+
 img01 = Chile
+
 img02 = Chile
+
 img03 = Rusia
+
 img04 = Chile
+
 img05 = Indonesia
+
 img06 = Mexico
+
 img07 = Japon
+
 img08 = EEUU
+
 img09 = Islandia
 
 snd:
+
 snd01 = Chile
+
 snd02 = Chile
+
 snd03 = Rusia
+
 snd04 = Chile
+
 snd05 = Indonesia
+
 snd06 = Mexico
+
 snd07 = Japon
+
 snd08 = EEUU
+
 snd09 = Islandia
 
  ______________________________________________________________________________

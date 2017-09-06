@@ -1,6 +1,5 @@
-#! /usr/bin/python
+#! /usr/bin/python 
 # -*-coding: UTF-8 -*-
-
 
 """
 trends_A.py
@@ -15,42 +14,13 @@ trends_A.py
 	.alternatively fades from white
 	.to color + centered trend text
 
-[CHI]: 0 Raspberry Pi con Chile de tendencia.
-[IND]: 1 Raspberry Pi con Indonesia de tendencia.
-[JPN]: 2 Raspberry Pi con Japón de tendencia.
-[RUS]: 3 Raspberry Pi con Rusia de tendencia.
-[USA]: 4 Raspberry Pi con EEUU de tendencia.
-[ICE]: 5 Raspberry Pi con Islandia de tendencia (si Islandia no estan en Trends usar Nueva Zelanda).
-[MEX]: 6 Raspberry Pi con México de tendencia.
-
-execute with arguments:
-
-sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "192.168.1.109" -p "10001" -g "MEX"
-
-orden de las caperpetas de audio y video
-
-img:
-img01 = Chile
-img02 = Chile
-img03 = Rusia
-img04 = Chile
-img05 = Indonesia
-img06 = Mexico
-img07 = Japon
-img08 = EEUU
-img09 = Islandia
-
-snd:
-snd01 = Chile
-snd02 = Chile
-snd03 = Rusia
-snd04 = Chile
-snd05 = Indonesia
-snd06 = Mexico
-snd07 = Japon
-snd08 = EEUU
-snd09 = Islandia
-
+[CHI]: 3 Raspberry Pi con Chile de tendencia. 
+[IND]: 1 Raspberry Pi con Indonesia de tendencia. 
+[JPN]: 1 Raspberry Pi con Japón de tendencia. 
+[RUS]: 1 Raspberry Pi con Rusia de tendencia. 
+[USA]: 1 Raspberry Pi con EEUU de tendencia. 
+[ICE]: 1 Raspberry Pi con Islandia de tendencia (si Islandia no estan en Trends usar Nueva Zelanda). 
+[MEX]: 1 Raspberry Pi con México de tendencia.
 
 """
 
@@ -83,12 +53,12 @@ def print_info(cs):
 	for j in range(3):
 		for i in range(3):
 			index = 3*j + i
-			#print '['+str(cs[index]["state"])+': '+str(cs[index]["past"])+': '+str(cs[index]["count"])+']\t',
-			print '['+str(cs[index]["count"])+']\t',
+			print '['+str(cs[index]["state"])+': '+str(cs[index]["past"])+': '+str(cs[index]["count"])+']\t',
+			#print '['+str(cs[index]["count"])+']\t',
 		print ''
 
 def send_actual(cell_no, trend_str, cOsc):
-	"""form and send osc message"""
+	"""form and send osc messahe"""
 	route = "/cell"
 	d = str(trend_str)
 	msg = OSC.OSCMessage()
@@ -118,13 +88,12 @@ def splitlines (t):
 
 
 def byreg(alltren, reg):
-	return [alltren[i] for i in range(len(alltren)) if i%7==rix[reg] or i%7==abs(rix[reg]-1)]
-	#"["+reg+"]: "+
+	return ["["+reg+"]: "+alltren[i] for i in range(len(alltren)) if i%7==rix[reg] or i%7==abs(rix[reg]-1)]
 
 
 
 
-colors = [(40, 158, 0), (45, 162, 3), (44, 152, 6)]
+colors = [(60, 186, 84), (244, 194, 13), (219, 50, 54), (72, 133, 237)]
 ims = 0;
 cc = colors[0]
 
@@ -154,8 +123,8 @@ if __name__ == "__main__":
 
 	# trends
 	region = args["region"]
-	google_username = "minimaltecno78b@gmail.com"
-	google_password = "terremoto88"
+	google_username = "XXXXX"
+	google_password = "XXXXX"
 	path = ""
 	pytrend = TrendReq(google_username, google_password, hl='es-MX', geo='MX', custom_useragent="RenzoTrend Script")
 	# parse
@@ -178,7 +147,7 @@ if __name__ == "__main__":
 	# resources directories
 	img_list = glob(args['img_dir'] + "*.*")
 	snd_list = glob(args['snd_dir'] + "*.*")
-
+	
 	# monitor/video source
 	mon_w = 320
 	mon_h = 240
@@ -207,7 +176,7 @@ if __name__ == "__main__":
 	s = pygame.Surface((disp_w, 110))
 	ss = pygame.Surface((disp_w, disp_h))
 
-	font = pygame.font.Font("arial.ttf", 90)
+	font = pygame.font.Font("Roboto-Regular.ttf", 90)
 	text = '[0FF]'
 	size = font.size(text)
 	c_w = 250, 240, 230
@@ -261,7 +230,7 @@ if __name__ == "__main__":
 		#th, thresh_img = cv2.threshold(frame_delta, 25, 255, cv2.THRESH_BINARY)
 		thresh_img = cv2.dilate(frame_delta, None, iterations=2)
 		# contours
-		contours, hie = cv2.findContours(thresh_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+		a,contours, hie = cv2.findContours(thresh_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 		big_cnts = [co for co in contours if cv2.contourArea(co) > args['min_area']]
 		big_cnts = sorted(big_cnts, key = cv2.contourArea, reverse = True)
 		# init cells
@@ -280,7 +249,7 @@ if __name__ == "__main__":
 			# rectangles
 			cv2.rectangle(frame_delta, (cx-10, cy-10), (cx+20, cy+20), (255,255,255))
 		# draw monitor
-		#cv2.imshow("[trends]: monitor", frame_delta)		#comment this line to hide monitor window
+		#cv2.imshow("[trends]: monitor", frame_delta)		#comment this line to hide monitor window		
 		print_info(cells)
 		# update state
 		summ = 0;
@@ -290,27 +259,26 @@ if __name__ == "__main__":
 				cells[i]['past'] = 0
 				cells[i]['state'] = 0
 			# if occupied count
-			else:
+			elif cells[i]['state']<2:
 				cells[i]['past'] += cells[i]['count']
 				cells[i]['count'] = 0
 				# if count>10 fade
-				if cells[i]['past'] > 10:
+				if (cells[i]['past'] > 10):  
 					if cells[i]['state'] == 0:
 						cells[i]['state'] = 1
 						# seleccionar evento
 						ant_ii = nn_ii
-
 						nn_ii = randint(0, len(img_list)-1)
 						nn_tt = randint(0, len(trends)-1)
 						nn_ss = randint(0, len(snd_list)-1)
 						line_tt = trends[nn_tt]
-						n_tt, strs_tt = splitlines(line_tt)
+						n_tt, strs_tt = splitlines(line_tt) 
 						fade = 0
 						snds[nn_ss].play()
 						# send OSC
 						send_actual(i, line_tt, cOsc)
-					elif cells[i]['past'] < 255:
-						fade = cells[i]['past']
+					elif (cells[i]['state']==1 and cells[i]['past'] < 127):
+						fade = cells[i]['past']*2
 						clock.tick(60)
 						#background
 						ss.set_alpha(fade)
@@ -328,22 +296,22 @@ if __name__ == "__main__":
 						#s.fill((0,0,0))
 						#screen.blit(s, (0, disp_h-100))
 						# draw
-						#for n,str_tt in enumerate(strs_tt):
-							#size_text = font.size(str_tt)
+						for n,str_tt in enumerate(strs_tt):
+							size_text = font.size(str_tt)
 							#surface
-							#s.set_alpha(fade)
-							#s.fill((0,0,0))
+							s.set_alpha(fade)
+							s.fill((0,0,0))
 							#text
-							#ren = font.render(str_tt, 1, c_w)
-							#distache = 0
-							#if n_tt==3: distache = disp_h-(3-n)*size_text[1]
-							#if n_tt==2: distache = disp_h-(2-n)*size_text[1]
-							#if n_tt==1: distache = disp_h-(1-n)*size_text[1]
-							#screen.blit(s, (0, distache))
-							#screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
+							ren = font.render(str_tt, 1, c_w)
+							distache = 0
+							if n_tt==3: distache = disp_h-(3-n)*size_text[1]
+							if n_tt==2: distache = disp_h-(2-n)*size_text[1]
+							if n_tt==1: distache = disp_h-(1-n)*size_text[1]
+							screen.blit(s, (0, distache))
+							screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
 
-					else:
+					elif (cells[i]['state']==1 and cells[i]['past'] >= 127 and cells[i]['past'] < 255):
 						fade = 255
 						clock.tick(60)
 						#screen.fill(c_b)
@@ -353,20 +321,24 @@ if __name__ == "__main__":
 						#s.fill((0,0,0))
 						#screen.blit(s, (0, disp_h-100))
 						# draw
-						#for n,str_tt in enumerate(strs_tt):
-							#size_text = font.size(str_tt)
+						for n,str_tt in enumerate(strs_tt):
+							size_text = font.size(str_tt)
 							#surface
-							#s.set_alpha(fade)
-							#s.fill((0,0,0))
+							s.set_alpha(fade)
+							s.fill((0,0,0))
 							#text
-							#ren = font.render(str_tt, 1, c_w)
-							#distache = 0
-							#if n_tt==3: distache = disp_h-(3-n)*size_text[1]
-							#if n_tt==2: distache = disp_h-(2-n)*size_text[1]
-							#if n_tt==1: distache = disp_h-(1-n)*size_text[1]
-							#screen.blit(s, (0, distache))
-							#screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
+							ren = font.render(str_tt, 1, c_w)
+							distache = 0
+							if n_tt==3: distache = disp_h-(3-n)*size_text[1]
+							if n_tt==2: distache = disp_h-(2-n)*size_text[1]
+							if n_tt==1: distache = disp_h-(1-n)*size_text[1]
+							screen.blit(s, (0, distache))
+							screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
+					elif  cells[i]['past'] > 255:
+						cells[i]['state'] = 2
+						#cells[i]['past'] = 0
+						#summ = 0
 					#time.sleep(10)
 				summ +=1;
 				t = 0
@@ -393,7 +365,7 @@ if __name__ == "__main__":
 			#ren = font.render(str_nn, 1, c_w)
 			#screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h/2 - size_text[1]/2))
 			line_tt = trends[ims]
-			n_tt, strs_tt = splitlines(line_tt)
+			n_tt, strs_tt = splitlines(line_tt) 
 			for n,str_tt in enumerate(strs_tt):
 				size_text = font.size(str_tt)
 				ren = font.render(str_tt, 1, c_w)
@@ -402,7 +374,7 @@ if __name__ == "__main__":
 			ss.fill((255, 255, 255))
 			screen.blit(ss, (0, 0))
 			pygame.display.update()
-
+		
 		# update cada hora
 		if time.time() - t0 > 3620:
 			"""
@@ -422,7 +394,7 @@ if __name__ == "__main__":
 				print "[t]: trends : ok"
 			except:
 				print "[x]: trends : could not update trends"
-
+			
 			t0 = time.time()
 
 		# break?
