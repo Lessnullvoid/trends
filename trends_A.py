@@ -88,12 +88,12 @@ def splitlines (t):
 
 
 def byreg(alltren, reg):
-	return ["["+reg+"]: "+alltren[i] for i in range(len(alltren)) if i%7==rix[reg] or i%7==abs(rix[reg]-1)]
+	#return ["["+reg+"]: "+alltren[i] for i in range(len(alltren)) if i%7==rix[reg] or i%7==abs(rix[reg]-1)]
 
 
 
 
-colors = [(40, 158, 0), (40, 158, 0), (40, 158, 0), (40, 158, 0)]
+colors = [(40, 158, 0), (45, 162, 3), (44, 152, 6), (48, 142, 4)]
 ims = 0;
 cc = colors[0]
 
@@ -296,19 +296,19 @@ if __name__ == "__main__":
 						#s.fill((0,0,0))
 						#screen.blit(s, (0, disp_h-100))
 						# draw
-						for n,str_tt in enumerate(strs_tt):
-							size_text = font.size(str_tt)
+						#for n,str_tt in enumerate(strs_tt):
+							#size_text = font.size(str_tt)
 							#surface
-							s.set_alpha(fade)
-							s.fill((0,0,0))
+							#s.set_alpha(fade)
+							#s.fill((0,0,0))
 							#text
-							ren = font.render(str_tt, 1, c_w)
-							distache = 0
-							if n_tt==3: distache = disp_h-(3-n)*size_text[1]
-							if n_tt==2: distache = disp_h-(2-n)*size_text[1]
-							if n_tt==1: distache = disp_h-(1-n)*size_text[1]
-							screen.blit(s, (0, distache))
-							screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
+							#ren = font.render(str_tt, 1, c_w)
+							#distache = 0
+							#if n_tt==3: distache = disp_h-(3-n)*size_text[1]
+							#if n_tt==2: distache = disp_h-(2-n)*size_text[1]
+							#if n_tt==1: distache = disp_h-(1-n)*size_text[1]
+							#screen.blit(s, (0, distache))
+							#screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
 
 					elif (cells[i]['state']==1 and cells[i]['past'] >= 127 and cells[i]['past'] < 255):
