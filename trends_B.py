@@ -97,7 +97,7 @@ if __name__ == "__main__":
 	ap.add_argument("-v", "--video", 								help="path to the video file")
 	ap.add_argument("-a", "--min-area", type=int, default=400, 		help="minimum area size")
 	ap.add_argument("-i", "--img-dir", 			  default="./img/", help="image dir path")
-	ap.add_argument("-s", "--snd-dir", 			  default="./snd/", help="sound dir path")
+	ap.add_argument("-s", "--snd-dir", 			  default="./snd01/", help="sound dir path")
 	ap.add_argument("-r", "--local-ip",			default="127.0.0.1",		help="local ip address")
 	ap.add_argument("-p", "--local-port",		default="10001",			help="local osc port")
 
