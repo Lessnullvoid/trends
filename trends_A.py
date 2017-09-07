@@ -88,7 +88,7 @@ def splitlines (t):
 
 
 def byreg(alltren, reg):
-	return ["["+reg+"]: "+alltren[i] for i in range(len(alltren)) if i%7==rix[reg] or i%7==abs(rix[reg]-1)]
+	return [alltren[i] for i in range(len(alltren)) if i%7==rix[reg] or i%7==abs(rix[reg]-1)]
 
 
 
