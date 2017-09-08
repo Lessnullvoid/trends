@@ -287,7 +287,15 @@ ______________________________________________________________________________
 _________________________________________________________________________________
 **Cambiar modem wifi**
 
+1 - Ingresar a la raspberry desde la terminal con clable de ethernet conectado desde la computadora.
+una vez dentro modifica el archivo wpa_supplicant con el siguiente comando:
+
 > sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+
+2 - ingresar el nombre y password de la red.
+
+3 - reiniciar y desconectar el cable ethernet
+
 
 ____________________________________________
 **Obtener la dirección IP de la rapsberry**
