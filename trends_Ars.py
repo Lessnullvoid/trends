@@ -64,6 +64,8 @@ from glob import glob
 from random import randint
 from bs4 import BeautifulSoup as BS
 
+unistr = u"Кобзон"
+
 # fnc
 def get_cell_num(x, y):
 	mon_w = 320
@@ -174,7 +176,7 @@ if __name__ == "__main__":
 		#trends = articles
 		trends = byreg(articles, region)
 	else:
-		trends = [tr.strip().rstrip() for tr in open u(use_local,'r').readlines()]
+		trends = [tr.strip().rstrip() for tr in open (use_local,'r').readlines()]
 	"""
 	trends = ['Montana Earthquake Is Felt For Hundreds Of Miles Early Thursday',
 			"Blac Chyna flashes ex Rob Kardashian's £200k gifts and poses with another man with another man ...",
