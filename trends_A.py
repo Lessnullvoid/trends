@@ -38,7 +38,7 @@ orden de las caperpetas de audio y video
 -img06 = Mexico
 -img07 = Japon
 -img08 = EEUU
--img09 = Islandia
+-img09 = NewZeland
 -
 -snd:
 -snd01 = Chile
