@@ -226,7 +226,7 @@ if __name__ == "__main__":
 	ss = pygame.Surface((disp_w, disp_h))
 
 
-	font = pygame.font.Font("arial.ttf", 180) #Aqui se ajusta el tamano del font
+	font = pygame.font.Font("arial.ttf", 150) #Aqui se ajusta el tamano del font
 	text = '[0FF]'
 	size = font.size(text)
 	c_w = 250, 240, 230
