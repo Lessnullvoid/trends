@@ -65,25 +65,25 @@ from random import randint
 from bs4 import BeautifulSoup as BS
 
 # fnc
-def get_cell_num(x, y):
-	mon_w = 320
-	mon_h = 240
-	if x < mon_w: cx = 0
-	if y < mon_h: cy = 0
-	index = 3*cy + cx
-	return index
-
 #def get_cell_num(x, y):
 	#mon_w = 320
 	#mon_h = 240
-	#if x < mon_w/3:	cx = 0
-	#elif x > 2*mon_w/3: cx = 2
-	#else: cx = 1
-	#if y < mon_h/3: cy = 0
-	#elif y > 2*mon_h/3: cy = 2
-	#else: cy = 1
+	#if x < mon_w: cx = 0
+	#if y < mon_h: cy = 0
 	#index = 3*cy + cx
 	#return index
+
+def get_cell_num(x, y):
+	mon_w = 320
+	mon_h = 240
+	if x < mon_w/3:	cx = 0
+	elif x > 2*mon_w/3: cx = 2
+	else: cx = 1
+	if y < mon_h/3: cy = 0
+	elif y > 2*mon_h/3: cy = 2
+	else: cy = 1
+	index = 3*cy + cx
+	return index
 
 def print_info(cs):
 	print "\t[c]:"
