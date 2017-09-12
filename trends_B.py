@@ -123,7 +123,7 @@ if __name__ == "__main__":
 
 	# display/pygame init
 	disp_w = 1280
-	disp_h = 720
+	disp_h = 1024
 	pygame.mixer.pre_init(44100, -16, 2, 2048)
 	pygame.init()
 	clock = pygame.time.Clock()
@@ -135,7 +135,7 @@ if __name__ == "__main__":
 	s = pygame.Surface((disp_w, 110))
 	ss = pygame.Surface((disp_w, disp_h))
 
-	font = pygame.font.Font("arial.ttf", 90)
+	font = pygame.font.Font("arial.ttf", 180)
 	text = '[0FF]'
 	size = font.size(text)
 	c_w = 250, 240, 230
