@@ -57,7 +57,6 @@ orden de las caperpetas de audio y video
 Los sonidos deben sumarse
 La imagen dedebe desaparecer en cuanto aparece sin dejar de sonar el sonido
 
-
 """
 
 # packages
@@ -397,12 +396,12 @@ if __name__ == "__main__":
 
 		if summ==0:
 			#go white
-			#clock.tick(60)
-			#if t<255: fade = 255-t
-			#elif t>512: fade = t-512
-			#else: fade = 0
-			#t += 4											#this controls fade velocity
-			#if t>767:
+			clock.tick(60)
+			if t<255: fade = 255-t
+			elif t>512: fade = t-512
+			else: fade = 0
+			t += 4											#this controls fade velocity
+			if t>767:
 				t = 0
 				cc = colors[randint(0, len(colors)-1)]
 				ims += 1
