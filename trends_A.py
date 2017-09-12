@@ -149,6 +149,7 @@ if __name__ == "__main__":
 	ap.add_argument("-r", "--receiver-ip",			default="127.0.0.1",		help="receiver ip address")
 	ap.add_argument("-p", "--receiver-port",		default="10001",			help="receiver osc port")
 	ap.add_argument("-g", "--region",				default="CHI",				help="regions: CHI, IND, JPN, RUS, USA, ICE, MEX")
+	ap.add_argument("-l", "--local",				default="False",			help="if != None, uses file as input trends")
 
 	args = vars(ap.parse_args())
 
@@ -160,15 +161,20 @@ if __name__ == "__main__":
 
 	# trends
 	region = args["region"]
-	google_username = "minimaltecno78b@gmail.com"
-	google_password = "terremoto88"
-	path = ""
-	pytrend = TrendReq(google_username, google_password, hl='es-MX', geo='MX', custom_useragent="RenzoTrend Script")
-	# parse
-	trending_searches = pytrend.trending_searches()
-	articles = trending_searches['title']
-	#trends = articles
-	trends = byreg(articles, region)
+	use_local = args["local"] if args["local"] != "False" else False
+
+	if not use_local:
+		google_username = "minimaltecno78b@gmail.com"
+		google_password = "terremoto88"
+		path = ""
+		pytrend = TrendReq(google_username, google_password, hl='es-MX', geo='MX', custom_useragent="RenzoTrend Script")
+		# parse
+		trending_searches = pytrend.trending_searches()
+		articles = trending_searches['title']
+		#trends = articles
+		trends = byreg(articles, region)
+	else:
+		trends = [tr.strip().rstrip() for tr in open(use_local, 'r').readlines()]
 	"""
 	trends = ['Montana Earthquake Is Felt For Hundreds Of Miles Early Thursday',
 			"Blac Chyna flashes ex Rob Kardashian's £200k gifts and poses with another man with another man ...",
@@ -267,7 +273,7 @@ if __name__ == "__main__":
 		#th, thresh_img = cv2.threshold(frame_delta, 25, 255, cv2.THRESH_BINARY)
 		thresh_img = cv2.dilate(frame_delta, None, iterations=2)
 		# contours
-		contours, hie = cv2.findContours(thresh_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+		a,contours, hie = cv2.findContours(thresh_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 		big_cnts = [co for co in contours if cv2.contourArea(co) > args['min_area']]
 		big_cnts = sorted(big_cnts, key = cv2.contourArea, reverse = True)
 		# init cells
