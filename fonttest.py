@@ -3,7 +3,7 @@
 import pygame, sys
 
 
-unistr = u"Овердрафтная карта"
+unistr = u"サトノダイヤモンド"
 pygame.font.init()
 srf = pygame.display.set_mode((640,480))
 f = pygame.font.Font("BloggerSans.ttf",20)
