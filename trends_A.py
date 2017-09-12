@@ -365,19 +365,19 @@ if __name__ == "__main__":
 						#s.fill((0,0,0))
 						#screen.blit(s, (0, disp_h-100))
 						# draw
-						for n,str_tt in enumerate(strs_tt):
-							size_text = font.size(str_tt)
+						#for n,str_tt in enumerate(strs_tt):
+							#size_text = font.size(str_tt)
 							#surface
-							s.set_alpha(fade)
-							s.fill((0,0,0))
+							#s.set_alpha(fade)
+							#s.fill((0,0,0))
 							#text
-							ren = font.render(str_tt, 1, c_w)
-							distache = 0
-							if n_tt==3: distache = disp_h-(3-n)*size_text[1]
-							if n_tt==2: distache = disp_h-(2-n)*size_text[1]
-							if n_tt==1: distache = disp_h-(1-n)*size_text[1]
-							screen.blit(s, (0, distache))
-							screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
+							#ren = font.render(str_tt, 1, c_w)
+							#distache = 0
+							#if n_tt==3: distache = disp_h-(3-n)*size_text[1]
+							#if n_tt==2: distache = disp_h-(2-n)*size_text[1]
+							#if n_tt==1: distache = disp_h-(1-n)*size_text[1]
+							#screen.blit(s, (0, distache))
+							#screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
 					elif  cells[i]['past'] > 255:
 						cells[i]['state'] = 2
