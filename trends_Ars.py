@@ -174,7 +174,7 @@ if __name__ == "__main__":
 		#trends = articles
 		trends = byreg(articles, region)
 	else:
-		trends = u[tr.strip().rstrip() for tr in open(use_local, 'r').readlines()]
+		trends = u[tr.strip().rstrip() for tr in open(use_local,'r').readlines()]
 	"""
 	trends = ['Montana Earthquake Is Felt For Hundreds Of Miles Early Thursday',
 			"Blac Chyna flashes ex Rob Kardashian's £200k gifts and poses with another man with another man ...",
