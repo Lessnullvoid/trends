@@ -168,19 +168,19 @@ _____________________________________________
 
 5. -ejecutar el script trends_A
 
->sudo python /home/pi/trends/trends_A.py -i "./img01/" -s "./snd01/" -r "127.0.0.1" -p "10001" -g "CHI"
+>sudo python /home/pi/trends/trends_A.py -i "./img01/" -s "./snd01/" -r "127.0.0.1" -p "10001" -g "CHI" -l "chi.txt"
 
->sudo python /home/pi/trends/trends_A.py -i "./img02/" -s "./snd02/" -r "127.0.0.1" -p "10001" -g "CHI"
+>sudo python /home/pi/trends/trends_A.py -i "./img02/" -s "./snd02/" -r "127.0.0.1" -p "10001" -g "CHI" -l "chi.txt"
 
->sudo python /home/pi/trends/trends_A.py -i "./img03/" -s "./snd03/" -r "127.0.0.1" -p "10001" -g "RUS"
+>sudo python /home/pi/trends/trends_Ars.py -i "./img03/" -s "./snd03/" -r "127.0.0.1" -p "10001" -g "RUS" -l "rus.txt"
 
->sudo python /home/pi/trends/trends_A.py -i "./img04/" -s "./snd04/" -r "127.0.0.1" -p "10001" -g "CHI"
+>sudo python /home/pi/trends/trends_A.py -i "./img04/" -s "./snd04/" -r "127.0.0.1" -p "10001" -g "CHI" -l "chi.txt"
 
 >sudo python /home/pi/trends/trends_A.py -i "./img05/" -s "./snd05/" -r "127.0.0.1" -p "10001" -g "IND"
 
->sudo python /home/pi/trends/trends_A.py -i "./img06/" -s "./snd06/" -r "127.0.0.1" -p "10001" -g "MEX"
+>sudo python /home/pi/trends/trends_A.py -i "./img06/" -s "./snd06/" -r "127.0.0.1" -p "10001" -g "MEX" -l "mex.txt"
 
->sudo python /home/pi/trends/trends_A.py -i "./img07/" -s "./snd07/" -r "127.0.0.1" -p "10001" -g "JPN"
+>sudo python /home/pi/trends/trends_Ajp.py -i "./img07/" -s "./snd07/" -r "127.0.0.1" -p "10001" -g "JPN" -l "jp.txt"
 
 >sudo python /home/pi/trends/trends_A.py -i "./img08/" -s "./snd08/" -r "127.0.0.1" -p "10001" -g "USA"
 
