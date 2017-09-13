@@ -2,5 +2,5 @@
 print("******************************************************")
 print("* Inicializando la raspberry:                        *")
 print("* Comprobando librerias:                             *")
-print("* Iniciando programa TRENDS****                      *")
+print("* Raspberry lista para iniciar scripts:               *")
 print("******************************************************")
