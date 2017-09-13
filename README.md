@@ -150,7 +150,10 @@ ________________________________________________________________________________
 
 > sudo python /home/pi/trends/trends_A.py -i "./img01/" -s "./snd01/" -r "127.0.0.1" -p "10001" -g "CHI" -l "chi.txt"
 
+- importante cambiar la dirección IP por la de la replica en ambas raspberrys
+
 - Guardar los cambios
+
 
 **Tercer ejemplo para instalar en la replica**
 
@@ -165,6 +168,8 @@ ________________________________________________________________________________
 > sudo python /home/pi/trends/hello.py
 
 > sudo python /home/pi/trends/trends_B.py -r "127.0.0.1" -p "10001" &
+
+- importante cambiar la dirección de la replica por su propio ip 
 
 - Guardar los cambios
 
@@ -189,6 +194,7 @@ _____________________________________________
 # Ejecutar Script desde terminal
 
 **trends_A.py**
+Nota trends A se ejecuta siempre en conjunto con trends C cuando no esta enviando datos a la replica. 
 
 1. Abrir terminal
 
@@ -216,7 +222,7 @@ _____________________________________________
 
 >sudo python /home/pi/trends/trends_A.py -i "./img06/" -s "./snd06/" -r "127.0.0.1" -p "10001" -g "MEX" -l "mex.txt"
 
->sudo python /home/pi/trends/trends_A.py -i "./img07/" -s "./snd07/" -r "127.0.0.1" -p "10001" -g "JPN" -l "jp.txt"
+>sudo python /home/pi/trends/trends_A.py -i "./img07/" -s "./snd07/" -r "127.0.0.1" -p "10001" -g "JPN" -l "jpn.txt"
 
 >sudo python /home/pi/trends/trends_A.py -i "./img08/" -s "./snd08/" -r "127.0.0.1" -p "10001" -g "USA"
 
@@ -240,6 +246,8 @@ En este paso es importante modificar la dirección de ip con la dirección de la
 
 2. navegar hasta la carpeta
 >cd trends
+
+- importante cambiar la dirección de ip por el de la propia replica
 
 3. ejecutar el script
 >sudo python /home/pi/trends/trends_B.py -r "127.0.0.1" -p "10001"
