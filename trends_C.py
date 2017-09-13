@@ -15,6 +15,11 @@ trends_B.py
 
 """
 
+sudo python /home/pi/trends/trends_C.py -r "192.168.0.23" -p "10001"
+
+sudo python /home/pi/trends/trends_A.py -i "./img01/" -s "./snd01/" -r "192.168.0.23" -p "10001" -g "CHI" -l "chi.txt"
+
+
 # packages
 import sys, time
 import OSC, pygame
@@ -125,7 +130,7 @@ if __name__ == "__main__":
 
 
 		# break?
-		pygame.event.get()
+		#pygame.event.get()
 		key = cv2.waitKey(1) & 0xFF
 		if key == ord('n'):
 			ff = gray_img
