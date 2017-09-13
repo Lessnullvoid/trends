@@ -394,7 +394,7 @@ if __name__ == "__main__":
 			if t<255: fade = 255-t
 			elif t>512: fade = t-512
 			else: fade = 0
-			t += 4											#this controls fade velocity
+			t += 32											#this controls fade velocity
 			if t>767:
 				t = 0
 				cc = colors[randint(0, len(colors)-1)]
