@@ -120,10 +120,10 @@ if __name__ == "__main__":
 	st = threading.Thread(target=s.serve_forever)
 	st.start()
 	#s.serve_forever()
-	print "[t]: OSC : ok"
+	print "[t]: OSC Reciber C connected"
 
 	t0 = time.time()
-	print "[t]: trends : ok"
+	print "[t]: trends Reciber C connected"
 
 
 
