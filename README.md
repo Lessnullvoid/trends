@@ -127,9 +127,9 @@ ________________________________________________________________________________
 
 - Añadir al final del archivo las siguientes lineas de comando:
 
-> sudo python /home/pi/trends/hello.py
-
 > cd /home/pi/trends
+
+> sudo python /home/pi/trends/hello.py
 
 > sudo python /home/pi/trends/trends_C.py -r "127.0.0.1" -p "10001" &
 
@@ -144,9 +144,9 @@ ________________________________________________________________________________
 
 - Añadir al final del archivo las siguientes lineas de comando:
 
-> sudo python /home/pi/trends/hello.py
-
 > cd /home/pi/trends
+
+> sudo python /home/pi/trends/hello.py
 
 > sudo python /home/pi/trends/trends_B.py -r "127.0.0.1" -p "10001" &
 
