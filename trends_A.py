@@ -321,8 +321,8 @@ if __name__ == "__main__":
 						snds[nn_ss].play()
 						# send OSC
 						send_actual(i, line_tt, cOsc)
-					elif (cells[i]['state']==1 and cells[i]['past'] < 4):
-						fade = cells[i]['past']*64
+					elif (cells[i]['state']==1 and cells[i]['past'] < 10):
+						fade = cells[i]['past']*32
 						clock.tick(60)
 						#background
 						ss.set_alpha(fade)
@@ -355,7 +355,7 @@ if __name__ == "__main__":
 							#screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
 
-					elif (cells[i]['state']==1 and cells[i]['past'] >= 4 and cells[i]['past'] < 8):
+					elif (cells[i]['state']==1 and cells[i]['past'] >= 8 and cells[i]['past'] < 12.1):
 						fade = 255
 						clock.tick(60)
 						#screen.fill(c_b)
@@ -379,7 +379,7 @@ if __name__ == "__main__":
 							#screen.blit(s, (0, distache))
 							#screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
-					elif  cells[i]['past'] > 10:
+					elif  cells[i]['past'] > 60:
 						cells[i]['state'] = 4
 						#cells[i]['past'] = 0
 						#summ = 0
