@@ -321,8 +321,8 @@ if __name__ == "__main__":
 						snds[nn_ss].play()
 						# send OSC
 						send_actual(i, line_tt, cOsc)
-					elif (cells[i]['state']==1 and cells[i]['past'] < 64):
-						fade = cells[i]['past']*4
+					elif (cells[i]['state']==1 and cells[i]['past'] < 16):
+						fade = cells[i]['past']*16
 						clock.tick(60)
 						#background
 						ss.set_alpha(fade)
@@ -332,7 +332,7 @@ if __name__ == "__main__":
 						screen.set_alpha(fade)
 						#screen.fill((0,0,0))
 						# actualizar display
-						imgs[nn_ii]#.set_alpha(fade)
+						imgs[nn_ii].set_alpha(fade)
 						simg = imgs[nn_ii].get_size()
 						screen.blit(imgs[nn_ii], (disp_w/2-simg[0]/2, 0))
 						# surface
@@ -355,7 +355,7 @@ if __name__ == "__main__":
 							#screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
 
-					elif (cells[i]['state']==1 and cells[i]['past'] >= 200 and cells[i]['past'] < 255):
+					elif (cells[i]['state']==1 and cells[i]['past'] >= 16 and cells[i]['past'] < 32):
 						fade = 255
 						clock.tick(60)
 						#screen.fill(c_b)
@@ -421,12 +421,7 @@ if __name__ == "__main__":
 
 		# update cada hora
 		if time.time() - t0 > 3620:
-			"""
-			trends = ['Montana Earthquake Is Felt For Hundreds Of Miles Early Thursday',
-			"Blac Chyna flashes ex Rob Kardashian's £200k gifts and poses with another man ...",
-			"Andrew Garfield Faces Backlash After Saying 'I Am a Gay Man Right Now Just ...",
-			"4 accused of fighting with officer on South Side"]
-			"""
+
 			try:
 				trending_searches = pytrend.trending_searches()
 				#articles = trending_searches['newsArticlesList']
