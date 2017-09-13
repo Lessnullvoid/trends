@@ -355,7 +355,7 @@ if __name__ == "__main__":
 							#screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
 
-					elif (cells[i]['state']==1 and cells[i]['past'] >= 180 and cells[i]['past'] < 255):
+					elif (cells[i]['state']==1 and cells[i]['past'] >= 200 and cells[i]['past'] < 255):
 						fade = 255
 						clock.tick(60)
 						#screen.fill(c_b)
@@ -379,8 +379,8 @@ if __name__ == "__main__":
 							#screen.blit(s, (0, distache))
 							#screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
-					elif  cells[i]['past'] > 255:
-						cells[i]['state'] = 2
+					elif  cells[i]['past'] > 127:
+						cells[i]['state'] = 4
 						#cells[i]['past'] = 0
 						#summ = 0
 					#time.sleep(10)
