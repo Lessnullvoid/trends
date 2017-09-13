@@ -156,7 +156,7 @@ ________________________________________________________________________________
 
 ________________________________________________________________________________
 
-**Apagar la raspberry a una hora especifica**
+# Apagar la raspberry a una hora especifica
 
 - Editar el archivo  /etc/crontab con:
 
