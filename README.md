@@ -120,16 +120,16 @@ ________________________________________________________________________________
 ________________________________________________________________________________
 **Argumentos por script autorun**
 
-- Editar el archivo /etc/rc.local con:
->  sudo nano /etc/rc.local
+- Editar el archivo /etc/profile con:
+>  sudo nano /etc/profile
 
-- Añadir al final del archivo, antes de "exit 0" una línea con el siguiente comando:
-> (sleep 180; sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "127.0.0.1" -p "10001" -g "MEX") &
-exit 0
+- Añadir al final del archivo las siguientes lineas de comando:
 
-- Ejemplo para  trends_B, cambiar ip/port):
-(sleep 180; python /home/pi/trends/trends_B.py -r "127.0.0.1" -p "10001") &
-exit 0
+> sudo python /home/pi/trends/hello.py
+
+> cd /home/pi/trends
+
+> sudo python /home/pi/trends/trends_A.py -i "./img01/" -s "./snd01/" -r "127.0.0.1" -p "10001" -g "CHI" -l "chi.txt"
 
 - Guardar los cambios
 
