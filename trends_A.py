@@ -56,8 +56,10 @@ orden de las caperpetas de audio y video
 - NOTAS PARA CORREGIR
 Los sonidos deben sumarse
 La imagen dedebe desaparecer en cuanto aparece sin dejar de sonar el sonido
+Hacer la letra uppercase
 
 """
+
 
 # packages
 from pytrends.request import TrendReq
@@ -173,7 +175,7 @@ if __name__ == "__main__":
 		google_username = "minimaltecno78b@gmail.com"
 		google_password = "terremoto88"
 		path = ""
-		pytrend = TrendReq(google_username, google_password, hl='es-MX', geo='MX', custom_useragent="RenzoTrend Script")
+		pytrend = TrendReq(google_username, google_password, hl='es-MX', geo='MX', custom_useragent="Trend Script")
 		# parse
 		trending_searches = pytrend.trending_searches()
 		articles = trending_searches['title']
@@ -181,15 +183,7 @@ if __name__ == "__main__":
 		trends = byreg(articles, region)
 	else:
 		trends = [tr.strip().rstrip() for tr in open(use_local, 'r').readlines()]
-	"""
-	trends = ['Montana Earthquake Is Felt For Hundreds Of Miles Early Thursday',
-			"Blac Chyna flashes ex Rob Kardashian's £200k gifts and poses with another man with another man ...",
-			"Andrew Garfield Faces Backlash After Saying 'I Am a Gay Man Right Now Just ...",
-			"4 accused of fighting with officer on South Side",
-			"Helado NEgro",
-			"Private Energy",
-			"Bardo Pond"]
-	"""
+
 	t0 = time.time()
 	print "[t]: trends : ok"
 
@@ -338,7 +332,7 @@ if __name__ == "__main__":
 						screen.set_alpha(fade)
 						#screen.fill((0,0,0))
 						# actualizar display
-						imgs[nn_ii].set_alpha(fade)
+						imgs[nn_ii]#.set_alpha(fade)
 						simg = imgs[nn_ii].get_size()
 						screen.blit(imgs[nn_ii], (disp_w/2-simg[0]/2, 0))
 						# surface
