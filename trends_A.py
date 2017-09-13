@@ -355,7 +355,7 @@ if __name__ == "__main__":
 							#screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
 
-					elif (cells[i]['state']==1 and cells[i]['past'] >= 10 and cells[i]['past'] < 12.5):
+					elif (cells[i]['state']==1 and cells[i]['past'] >= 10 and cells[i]['past'] < 12):
 						fade = 255
 						clock.tick(60)
 						#screen.fill(c_b)
@@ -394,7 +394,7 @@ if __name__ == "__main__":
 			if t<255: fade = 255-t
 			elif t>512: fade = t-512
 			else: fade = 0
-			t += 32											#this controls fade velocity
+			t += 22											#this controls fade velocity
 			if t>767:
 				t = 0
 				cc = colors[randint(0, len(colors)-1)]
