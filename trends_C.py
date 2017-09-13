@@ -118,80 +118,11 @@ if __name__ == "__main__":
 	t0 = time.time()
 	print "[t]: trends : ok"
 
-	# resources directories
-	snd_list = glob(args['snd_dir'] + "*.*")
 
-	# display/pygame init
-	disp_w = 1280
-	disp_h = 720
-	pygame.mixer.pre_init(44100, -16, 2, 2048)
-	pygame.init()
-	clock = pygame.time.Clock()
-	#screen = pygame.display.set_mode((disp_w, disp_h))
-	screen = pygame.display.set_mode((disp_w, disp_h), pygame.FULLSCREEN)
-	pygame.display.set_caption('[trends]: display')
-	pygame.mouse.set_visible(0)
-
-	s = pygame.Surface((disp_w, 110))
-	ss = pygame.Surface((disp_w, disp_h))
-
-	font = pygame.font.Font("arial.ttf", 90)
-	text = '[0FF]'
-	size = font.size(text)
-	c_w = 250, 240, 230
-	c_b = 5, 5, 5
-
-	screen.fill(c_b)
-	ren = font.render(text, 1, c_w)
-	screen.blit(ren, (disp_w/2 - size[0]/2, disp_h/2 - size[1]/2))
-	pygame.display.update()
-	print "[t]: display : 0FF"
-
-	# get sounds
-	snds = []
-	for snd_name in snd_list:
-		snds.append( pygame.mixer.Sound(snd_name) )
-	print "[t]: snd_list :"+str(len(snd_list))
 
 	# .the loop
 	while True:
-		# ----- ----- ------ ----- ----- NO DETECTION
-		#cv2.imshow("[trends]: monitor", None)
-		#go white
-		clock.tick(60)
-		if t<255: fade = 255-t
-		elif t>512: fade = t-512
-		else: fade = 0
-		t += 16											#this controls fade velocity
-		if t>767:
-			t = 0
-			cc = colors[randint(0, len(colors)-1)]
-			if (len(trends)>0 and ims<len(trends)):
-				ims = -1
-				if ims>len(trends)-1: ims = -1
-		screen.set_alpha(255-fade)
-		screen.fill(cc)
 
-		if (len(trends)>0):
-			line_tt = trends[ims]
-			n_tt, strs_tt = splitlines(line_tt)
-			for n,str_tt in enumerate(strs_tt):
-				size_text = font.size(str_tt)
-				ren = font.render(str_tt, 1, c_w)
-				screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h/2 - (1-n)*size_text[1]))
-		else:
-			size_text = font.size("[0FF]")
-			ren = font.render("[0FF]", 1, c_w)
-			screen.blit(ren, (disp_w/2 - size_text[0]/2, disp_h/2 - size_text[1]/2))
-
-		if (len(trends)>10):
-			trends = trends[-10:]
-
-
-		ss.set_alpha(fade)
-		ss.fill((255, 255, 255))
-		screen.blit(ss, (0, 0))
-		pygame.display.update()
 
 		# break?
 		pygame.event.get()
