@@ -183,6 +183,7 @@ if __name__ == "__main__":
 		trends = byreg(articles, region)
 	else:
 		trends = [tr.strip().rstrip() for tr in open(use_local, 'r').readlines()]
+		trends= [a.upper() for a in trends]
 
 	t0 = time.time()
 	print "[t]: trends : ok"
