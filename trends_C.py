@@ -56,19 +56,19 @@ def print_info(cs):
 		for i in range(3):
 			index = 3*j + i
 			#print '['+str(cs[index]["state"])+': '+str(cs[index]["past"])+': '+str(cs[index]["count"])+']\t',
-			print '['+str(cs[index]["count"])+']\t',
+			#print '['+str(cs[index]["count"])+']\t',
 		print ''
 
 
 def cell_callback(path, tags, args, source):
 	user = ''.join(path.split("/"))
 	#no_cell = data.split("/")[1]
-	txt = "[%d] :: %s" % (args[0], args[1])
-	print txt
+	#txt = "[%d] :: %s" % (args[0], args[1])
+	#print txt
 	trends.append(args[1])
 	#play a sound each time
-	nn_ss = randint(0, len(snd_list)-1)
-	snds[nn_ss].play()
+	#nn_ss = randint(0, len(snd_list)-1)
+	#snds[nn_ss].play()
 	return
 
 def splitlines (t):
