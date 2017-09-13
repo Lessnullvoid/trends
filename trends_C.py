@@ -13,11 +13,13 @@ trends_B.py
 	.alternatively fades from white
 	.to color + centered trend text
 
+	sudo python /home/pi/trends/trends_C.py -r "192.168.0.23" -p "10001"
+
+	sudo python /home/pi/trends/trends_A.py -i "./img01/" -s "./snd01/" -r "192.168.0.23" -p "10001" -g "CHI" -l "chi.txt"
+
 """
 
-sudo python /home/pi/trends/trends_C.py -r "192.168.0.23" -p "10001"
 
-sudo python /home/pi/trends/trends_A.py -i "./img01/" -s "./snd01/" -r "192.168.0.23" -p "10001" -g "CHI" -l "chi.txt"
 
 
 # packages
