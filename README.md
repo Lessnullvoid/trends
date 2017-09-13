@@ -148,11 +148,26 @@ ________________________________________________________________________________
 
 > sudo python /home/pi/trends/hello.py
 
-> sudo python /home/pi/trends/trends_B.py -r "127.0.0.1" -p "10001" &
-
 > sudo python /home/pi/trends/trends_A.py -i "./img01/" -s "./snd01/" -r "127.0.0.1" -p "10001" -g "CHI" -l "chi.txt"
 
 - Guardar los cambios
+
+**Tercer ejemplo para instalar en la replica**
+
+- Editar el archivo /etc/profile con:
+
+>  sudo nano /etc/profile
+
+- Añadir al final del archivo las siguientes lineas de comando:
+
+> cd /home/pi/trends
+
+> sudo python /home/pi/trends/hello.py
+
+> sudo python /home/pi/trends/trends_B.py -r "127.0.0.1" -p "10001" &
+
+- Guardar los cambios
+
 
 ________________________________________________________________________________
 
