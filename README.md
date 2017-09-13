@@ -118,7 +118,9 @@ ________________________________________________________________________________
 > "-p", "--local-port",        default="10001",            help="local osc port"
 
 ________________________________________________________________________________
-**Argumentos por script autorun**
+# Argumentos por script autorun
+
+**Primer ejemplo para instalar en las raspberrys que no transmiten al replica**
 
 - Editar el archivo /etc/profile con:
 >  sudo nano /etc/profile
@@ -128,6 +130,25 @@ ________________________________________________________________________________
 > sudo python /home/pi/trends/hello.py
 
 > cd /home/pi/trends
+
+> sudo python /home/pi/trends/trends_C.py -r "127.0.0.1" -p "10001" &
+
+> sudo python /home/pi/trends/trends_A.py -i "./img01/" -s "./snd01/" -r "127.0.0.1" -p "10001" -g "CHI" -l "chi.txt"
+
+- Guardar los cambios
+
+**Segundo ejemplo para instalar en las raspberrys que transmiten al replica**
+
+ Editar el archivo /etc/profile con:
+>  sudo nano /etc/profile
+
+- Añadir al final del archivo las siguientes lineas de comando:
+
+> sudo python /home/pi/trends/hello.py
+
+> cd /home/pi/trends
+
+> sudo python /home/pi/trends/trends_B.py -r "127.0.0.1" -p "10001" &
 
 > sudo python /home/pi/trends/trends_A.py -i "./img01/" -s "./snd01/" -r "127.0.0.1" -p "10001" -g "CHI" -l "chi.txt"
 
