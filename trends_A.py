@@ -73,25 +73,25 @@ from random import randint
 from bs4 import BeautifulSoup as BS
 
 # fnc
-#def get_cell_num(x, y):
-	#mon_w = 320
-	#mon_h = 240
-	#if x < mon_w: cx = 0
-	#if y < mon_h: cy = 0
-	#index = 3*cy + cx
-	#return index
-
 def get_cell_num(x, y):
 	mon_w = 320
 	mon_h = 240
-	if x < mon_w/3:	cx = 0
-	elif x > 2*mon_w/3: cx = 2
-	else: cx = 1
-	if y < mon_h/3: cy = 0
-	elif y > 2*mon_h/3: cy = 2
-	else: cy = 1
+	if x < mon_w: cx = 0
+	if y < mon_h: cy = 0
 	index = 3*cy + cx
 	return index
+
+#def get_cell_num(x, y):
+	#mon_w = 320
+	#mon_h = 240
+	#if x < mon_w/3:	cx = 0
+	#elif x > 2*mon_w/3: cx = 2
+	#else: cx = 1
+	#if y < mon_h/3: cy = 0
+	#elif y > 2*mon_h/3: cy = 2
+	#else: cy = 1
+	#index = 3*cy + cx
+	#return index
 
 def print_info(cs):
 	print "\t[c]:"
@@ -355,7 +355,7 @@ if __name__ == "__main__":
 							#screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
 
-					elif (cells[i]['state']==1 and cells[i]['past'] >= 16 and cells[i]['past'] < 18):
+					elif (cells[i]['state']==1 and cells[i]['past'] >= 16 and cells[i]['past'] < 17):
 						fade = 255
 						clock.tick(60)
 						#screen.fill(c_b)
