@@ -232,48 +232,6 @@ En este paso es importante modificar la dirección de ip con la dirección de la
 4. detener el script
 >ctrl + c
 
-**Contenido de las carpetas de medios**
-
-img:
-
-img01 = Chile
-
-img02 = Chile
-
-img03 = Rusia
-
-img04 = Chile
-
-img05 = Indonesia
-
-img06 = Mexico
-
-img07 = Japon
-
-img08 = EEUU
-
-img09 = Islandia
-
-snd:
-
-snd01 = Chile
-
-snd02 = Chile
-
-snd03 = Rusia
-
-snd04 = Chile
-
-snd05 = Indonesia
-
-snd06 = Mexico
-
-snd07 = Japon
-
-snd08 = EEUU
-
-snd09 = Islandia
-
  ______________________________________________________________________________
 **Actualizar el código desde el repositorio**
 
