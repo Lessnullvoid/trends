@@ -379,7 +379,7 @@ if __name__ == "__main__":
 							#screen.blit(s, (0, distache))
 							#screen.blit(ren, (disp_w/2 - size_text[0]/2, distache))
 						pygame.display.update()
-					elif  cells[i]['past'] > 8:
+					elif  cells[i]['past'] > 10:
 						cells[i]['state'] = 4
 						#cells[i]['past'] = 0
 						#summ = 0
