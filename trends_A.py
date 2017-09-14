@@ -36,26 +36,26 @@ sudo python /home/pi/trends/trends_A.py -i "./img07/" -s "./snd07/" -r "192.168.
 orden de las caperpetas de audio y video
 
 -img:
--img01 = Chile
--img02 = Chile
--img03 = Rusia
--img04 = Chile
--img05 = Indonesia
--img06 = Mexico
--img07 = Japon
--img08 = EEUU
--img09 = NewZeland
+-img01 = Chile // conectado a replica
+-img02 = Chile // conectado a replica
+-img03 = Rusia // localhost
+-img04 = Chile // conectado a replica
+-img05 = Indonesia // localhost
+-img06 = Mexico // localhost
+-img07 = Japon // localhost
+-img08 = EEUU // localhost
+-img09 = NewZeland // localhost
 -
 -snd:
--snd01 = Chile
--snd02 = Chile
--snd03 = Rusia
--snd04 = Chile
--snd05 = Indonesia
--snd06 = Mexico
--snd07 = Japon
--snd08 = EEUU
--snd09 = Islandia
+-snd01 = Chile //
+-snd02 = Chile //
+-snd03 = Rusia //
+-snd04 = Chile //
+-snd05 = Indonesia //
+-snd06 = Mexico //
+-snd07 = Japon  //
+-snd08 = EEUU //
+-snd09 = Islandia //
 
 - NOTAS PARA CORREGIR
 Los sonidos deben sumarse
@@ -225,7 +225,7 @@ if __name__ == "__main__":
 	ss = pygame.Surface((disp_w, disp_h))
 
 
-	font = pygame.font.Font("arial.ttf", 150) #Aqui se ajusta el tamano del font
+	font = pygame.font.Font("arial.ttf", 120) #Aqui se ajusta el tamano del font
 	text = '[0FF]'
 	size = font.size(text)
 	c_w = 250, 240, 230
