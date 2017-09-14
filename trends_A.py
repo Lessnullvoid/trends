@@ -29,6 +29,10 @@ trends_A.py
 
 -sudo python /home/pi/trends/trends_A.py -i "./img/" -s "./snd/" -r "192.168.1.109" -p "10001" -g "MEX"
 
+sudo python /home/pi/trends/trends_A.py -i "./img01/" -s "./snd01/" -r "192.168.0.23" -p "10001" -g "CHI" -l "chi.txt"
+
+sudo python /home/pi/trends/trends_A.py -i "./img07/" -s "./snd07/" -r "192.168.0.23" -p "10001" -g "JPN" -l "jpn.txt"
+
 orden de las caperpetas de audio y video
 
 -img:
