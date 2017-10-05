@@ -60,6 +60,7 @@ def cell_callback(path, tags, args, source):
 	print txt
 	trends.append(args[1])
 	#play a sound each time
+	line_tt = trends[-1]
 	nn_ss = randint(0, len(snd_list)-1)
 	snds[nn_ss].play()
 	return
@@ -102,6 +103,7 @@ if __name__ == "__main__":
 	ap.add_argument("-s", "--snd-dir", 			  default="./snd01/", help="sound dir path")
 	ap.add_argument("-r", "--local-ip",			default="127.0.0.1",		help="local ip address")
 	ap.add_argument("-p", "--local-port",		default="10001",			help="local osc port")
+	ap.add_argument("-l", "--local",			default="False",			help="if != None, uses file as input trends")
 
 	args = vars(ap.parse_args())
 
@@ -114,6 +116,14 @@ if __name__ == "__main__":
 	st.start()
 	#s.serve_forever()
 	print "[t]: OSC : ok"
+
+	# trends
+	use_local = args["local"] if args["local"] != "False" else False
+
+	if use_local:
+		trends = [tr.strip().rstrip() for tr in open(use_local, 'r').readlines()]
+		trends= [a.upper() for a in trends]
+		line_tt = trends[-1]
 
 	t0 = time.time()
 	print "[t]: trends : ok"
@@ -169,11 +179,16 @@ if __name__ == "__main__":
 			if (len(trends)>0 and ims<len(trends)):
 				ims = -1
 				if ims>len(trends)-1: ims = -1
+			#
+			nn_tt = randint(0, len(trends)-1)
+			line_tt = trends[nn_tt]
+			#
+
 		screen.set_alpha(255-fade)
 		screen.fill(cc)
 
 		if (len(trends)>0):
-			line_tt = trends[ims]
+			#line_tt = trends[ims]
 			n_tt, strs_tt = splitlines(line_tt)
 			for n,str_tt in enumerate(strs_tt):
 				size_text = font.size(str_tt)
