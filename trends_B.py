@@ -145,7 +145,7 @@ if __name__ == "__main__":
 	s = pygame.Surface((disp_w, 110))
 	ss = pygame.Surface((disp_w, disp_h))
 
-	font = pygame.font.Font("arial.ttf", 60)
+	font = pygame.font.Font("arial.ttf", 100)
 	text = '[0FF]'
 	size = font.size(text)
 	c_w = 250, 240, 230
